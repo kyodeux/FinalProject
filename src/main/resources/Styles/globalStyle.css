@@ -24,3 +24,25 @@
 #closeButton:hover{
     -fx-fill : white;
 }
+
+#closeButton1:hover{
+    -fx-fill : white;
+}
+
+#signUpButton:hover{
+    -fx-background-color : #301296;
+}
+
+#signUpButton{
+    -fx-background-radius : .5em;
+    -fx-border-radius : .5em;
+    -fx-background-color : #123F93;
+}
+
+#newUser:focused{
+    -fx-border-color :  #123F93;
+}
+
+#newPassword:focused{
+    -fx-border-color :  #123F93;
+}

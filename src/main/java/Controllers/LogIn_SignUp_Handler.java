@@ -1,13 +1,19 @@
 package Controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class LogIn_SignUp_Handler {
     @FXML
+    private Parent logIn;
+    @FXML
+    private Parent signUp;
+    
     private double xOffset = 0;
     private double yOffset = 0;
     
@@ -25,5 +31,18 @@ public class LogIn_SignUp_Handler {
     }
     public void onClosePressed(MouseEvent e){
         System.exit(0);
+    }
+    public void openLogIn(MouseEvent e){
+        Platform.runLater(() -> {
+            logIn.setVisible(true);
+            signUp.setVisible(false);
+        });
+    }
+    public void openSignUp(MouseEvent e){
+        
+        Platform.runLater(() -> {
+            signUp.setVisible(true);
+            logIn.setVisible(false);
+        });
     }
 }
