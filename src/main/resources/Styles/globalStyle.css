@@ -1,0 +1,26 @@
+.text-field:focused{
+    -fx-border-color : rgb(255, 128, 0);
+    -fx-border-width : 2;
+}
+
+.text-field{
+    -fx-background-color : #0d1117;
+    -fx-border-color :  #292e35;
+    -fx-border-radius :  .5em;
+    -fx-background-radius : .5em;
+    -fx-text-fill : white;
+}
+
+#loginButton:hover{
+    -fx-background-color :  rgb(254,82,2);
+}
+
+#loginButton{
+    -fx-background-radius : .5em;
+    -fx-border-radius : .5em;
+    -fx-background-color :  rgb(255,128,0);
+}
+
+#closeButton:hover{
+    -fx-fill : white;
+}
