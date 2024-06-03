@@ -89,7 +89,7 @@
          <children>
             <AnchorPane layoutX="53.0" layoutY="172.0" prefHeight="242.0" prefWidth="294.0" style="-fx-background-color: #161b22; -fx-border-radius: .5em; -fx-background-radius: .5em; -fx-border-color: #292e35;">
                <children>
-                  <TextField layoutX="20.0" layoutY="46.0" prefHeight="37.0" prefWidth="252.0" styleClass="text-field">
+                  <TextField fx:id="login_User" layoutX="20.0" layoutY="46.0" prefHeight="37.0" prefWidth="252.0" styleClass="text-field">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -104,7 +104,7 @@
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Text>
-                  <PasswordField layoutX="20.0" layoutY="126.0" prefHeight="38.0" prefWidth="252.0">
+                  <PasswordField fx:id="login_Password" layoutX="20.0" layoutY="126.0" prefHeight="38.0" prefWidth="252.0">
                      <font>
                         <Font size="13.0" />
                      </font>
