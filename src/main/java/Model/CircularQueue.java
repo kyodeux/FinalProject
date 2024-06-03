@@ -6,7 +6,7 @@ public class CircularQueue {
         if (first == null){return 0;}
         
         int count = 0;
-        Node current = first;
+        NodeContainer current = first;
         do{
             count++;
             current = current.next;
@@ -14,7 +14,7 @@ public class CircularQueue {
         
         return count;
     }
-    public void push(Node e){ 
+    public void push(NodeContainer e){ 
         if (last == null){
             last = e;
             first = e;
@@ -37,19 +37,19 @@ public class CircularQueue {
         
         notifyNodeAdded(e);
     }
-    public Node peekAt(int index){        
+    public NodeContainer peekAt(int index){        
         if (index > length() - 1 || index < 0){return null;}
-        Node x = first;
+        NodeContainer x = first;
         for (int i = 0; i < index; i++){
             x = x.next;
         }
         
         return x;
     }
-    public Node pop(){
+    public NodeContainer pop(){
         if (first == null){return null;}
         if (length() == 1){
-            Node x = first;
+            NodeContainer x = first;
             
             first = null;
             last = null;
@@ -58,7 +58,7 @@ public class CircularQueue {
             return x;
         }
         
-        Node x = first;
+        NodeContainer x = first;
         x.prev.next = x.next;
         x.next.prev = x.prev;
         first = x.next;
@@ -72,7 +72,7 @@ public class CircularQueue {
     public void setListeners(CircularQueue listeners) {
         this.listeners = listeners;
     }
-    private void notifyNodeRemoved(Node removed){
+    private void notifyNodeRemoved(NodeContainer removed){
         if (listeners == null){return;}
         
         for (int i = 0; i < listeners.length(); i++) {
@@ -80,7 +80,7 @@ public class CircularQueue {
             listener.onNodeRemoved(removed);
         }
     }
-    private void notifyNodeAdded(Node added){
+    private void notifyNodeAdded(NodeContainer added){
         if (listeners == null){return;}
         
         for (int i = 0; i < listeners.length(); i++) {
@@ -90,6 +90,6 @@ public class CircularQueue {
     }
     
     private CircularQueue listeners;
-    private Node first;
-    private Node last;
+    private NodeContainer first;
+    private NodeContainer last;
 }

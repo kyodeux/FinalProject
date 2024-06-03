@@ -10,9 +10,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Main extends Application {
-
+    private static Stage stage;
+    
     @Override
     public void start(Stage stage) {
+        Main.stage = stage;
+        
         try {
             Parent login_signup = FXMLLoader.load(getClass().getResource("/View/login_signup.fxml"));            
             Scene scene = new Scene(login_signup);
@@ -24,7 +27,9 @@ public class Main extends Application {
             stage.show();
         } catch (IOException e) {}
     }
-
+    public static Stage getStage(){
+        return stage;
+    }
     public static void main(String[] args) {
         launch(args);
     }
