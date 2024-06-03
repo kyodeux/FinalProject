@@ -1,0 +1,20 @@
+[
+    {
+        "password": "loquesea",
+        "isAdmin": true,
+        "userName": "Adrain Cruz",
+        "user": "adrian@admin"
+    },
+    {
+        "password": "poto",
+        "isAdmin": true,
+        "userName": "Kyo",
+        "user": "kyo@admin"
+    },
+    {
+        "password": "hailHitler",
+        "isAdmin": true,
+        "userName": "SrChris",
+        "user": "chris@admin"
+    }
+]

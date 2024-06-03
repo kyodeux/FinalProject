@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="615.0" prefWidth="935.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="background" opacity="0.985" prefHeight="615.0" prefWidth="935.0" style="-fx-background-color: #0d1117; -fx-background-radius: 1em;" />
+      <FlowPane fx:id="welcomeMessage1" layoutX="373.0" layoutY="308.0" opacity="0.0" orientation="VERTICAL" prefHeight="31.0" prefWidth="182.0" visible="false">
+         <children>
+            <Label prefHeight="30.0" prefWidth="123.0" text="Ingresando como : " textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="welcomeUserType" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="65.0" text="Usuario" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </FlowPane>
+      <Label fx:id="welcomeMessage" layoutX="208.0" layoutY="264.0" opacity="0.0" prefHeight="44.0" prefWidth="518.0" style="-fx-alignment: center;" text="Bienvenido @User" textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Black" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
