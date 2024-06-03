@@ -25,7 +25,7 @@
          <children>
             <AnchorPane layoutX="53.0" layoutY="172.0" prefHeight="242.0" prefWidth="294.0" style="-fx-background-color: #161b22; -fx-border-radius: .5em; -fx-background-radius: .5em; -fx-border-color: #292e35;">
                <children>
-                  <TextField fx:id="newUser" layoutX="20.0" layoutY="46.0" prefHeight="37.0" prefWidth="252.0" styleClass="text-field">
+                  <TextField fx:id="signup_User" layoutX="20.0" layoutY="46.0" prefHeight="37.0" prefWidth="252.0" styleClass="text-field">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -40,12 +40,12 @@
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Text>
-                  <PasswordField fx:id="newPassword" layoutX="20.0" layoutY="126.0" prefHeight="38.0" prefWidth="252.0">
+                  <PasswordField fx:id="signup_Password" layoutX="20.0" layoutY="126.0" prefHeight="38.0" prefWidth="252.0">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </PasswordField>
-                  <Button fx:id="signUpButton" layoutX="20.0" layoutY="185.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="252.0" text="Registrame!" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="signUpButton" layoutX="20.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#handleSignup" prefHeight="38.0" prefWidth="252.0" text="Registrame!" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -109,7 +109,7 @@
                         <Font size="13.0" />
                      </font>
                   </PasswordField>
-                  <Button fx:id="loginButton" layoutX="20.0" layoutY="185.0" mnemonicParsing="false" onMousePressed="#onLogInRequest" prefHeight="38.0" prefWidth="252.0" text="Iniciar Sesion" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="loginButton" layoutX="20.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#handleLogin" prefHeight="38.0" prefWidth="252.0" text="Iniciar Sesion" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
