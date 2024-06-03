@@ -39,10 +39,10 @@
     -fx-background-color : #123F93;
 }
 
-#newUser:focused{
+#signup_User:focused{
     -fx-border-color :  #123F93;
 }
 
-#newPassword:focused{
+#signup_Password:focused{
     -fx-border-color :  #123F93;
 }

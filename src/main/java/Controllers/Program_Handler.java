@@ -7,6 +7,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,13 +18,10 @@ public class Program_Handler {
     
     @FXML
     private AnchorPane background;
-    
     @FXML
     private Label welcomeUserType;
-    
     @FXML
     private Label welcomeMessage;
-    
     @FXML
     private FlowPane welcomeMessage1;
     
@@ -32,7 +30,7 @@ public class Program_Handler {
     public void setup(User user){
         this.user = user;
     }
-    
+
     public void playWelcomeAnimation(){
         welcomeMessage.setText("Bienvenido @" + user.getUserName());
         if (user.isAdmin()){

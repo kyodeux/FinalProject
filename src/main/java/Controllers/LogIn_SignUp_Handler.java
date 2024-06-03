@@ -35,12 +35,96 @@ public class LogIn_SignUp_Handler {
     private TextField login_User;
     @FXML
     private PasswordField login_Password;
+    @FXML
+    private TextField signup_User;
+    @FXML
+    private PasswordField signup_Password;
     
     private User indexedUser;
     
     private Stage stage;
     private double xOffset = 0;
     private double yOffset = 0;
+    
+    private void resetInput(){
+        login_User.setText("");
+        login_Password.setText("");
+        login_User.setStyle("");
+        login_Password.setStyle("");
+        
+        signup_User.setText("");
+        signup_Password.setText("");
+        signup_User.setStyle("");
+        signup_Password.setStyle("");
+    }
+    
+    public void handleLogin() {
+        login_User.setStyle(null);
+        login_Password.setStyle(null);
+        
+        if (login_User.getText().isBlank() || login_Password.getText().isBlank()){return;}
+        
+        String user = login_User.getText();
+        try{
+            indexedUser = (User) Main.userCatalog.get(user);
+        }catch(JSONException e){}
+
+        if (indexedUser == null){
+            login_User.setStyle("-fx-border-color : #C17B61");
+            
+            return;
+        }
+        
+        if (!indexedUser.getPassword().equals(login_Password.getText())){
+            login_Password.setStyle("-fx-border-color : #C17B61");
+            
+            return;
+        }
+        
+        Platform.runLater(() -> {
+            animateTransition();
+        });
+    }
+    
+    public void handleSignup(){
+        signup_User.setStyle(null);
+        signup_Password.setStyle(null);
+        
+        if (signup_User.getText().isBlank()){
+            signup_User.setStyle("-fx-border-color : #C17B61");
+        }
+        
+        if (signup_Password.getText().isBlank()){
+            signup_Password.setStyle("-fx-border-color : #C17B61");
+        }
+        
+        if (signup_User.getText().isBlank() || signup_Password.getText().isBlank()){return;}
+        
+ 
+        String user = signup_User.getText();
+        String password = signup_Password.getText();
+        String userName = user;
+        
+        try{
+            indexedUser = (User) Main.userCatalog.get(user);
+        }catch(JSONException e){}
+        
+        if (indexedUser != null){
+            signup_User.setStyle("-fx-border-color : #C17B61");
+            
+            return;
+        }
+        
+        User newUser = new User(user, password, userName);
+        indexedUser = newUser;
+        
+        Main.userList.push(newUser);
+        Main.userCatalog.put(newUser.getUser(), newUser);
+        
+        Platform.runLater(() -> {
+            animateTransition();
+        });
+    }
     
     public void pressedDetected(MouseEvent e) {
         xOffset = e.getSceneX();
@@ -73,34 +157,6 @@ public class LogIn_SignUp_Handler {
         });
     }
 
-    public void onLogInRequest() {
-        login_User.setStyle(null);
-        login_Password.setStyle(null);
-        
-        if (login_User.getText().isBlank() || login_Password.getText().isBlank()){return;}
-        
-        String user = login_User.getText();
-        try{
-            indexedUser = (User) Main.userCatalog.get(user);
-        }catch(JSONException e){}
-
-        if (indexedUser == null){
-            login_User.setStyle("-fx-border-color : #C17B61");
-            
-            return;
-        }
-        
-        if (!indexedUser.getPassword().equals(login_Password.getText())){
-            login_Password.setStyle("-fx-border-color : #C17B61");
-            
-            return;
-        }
-        
-        Platform.runLater(() -> {
-            animateTransition();
-        });
-    }
-    
     private void animateTransition() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         Runnable task = () -> {
