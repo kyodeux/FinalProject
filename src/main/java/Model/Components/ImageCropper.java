@@ -1,7 +1,9 @@
 package Model.Components;
 
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.shape.Rectangle;
 
 public class ImageCropper {

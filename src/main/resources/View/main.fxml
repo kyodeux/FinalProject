@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="661.0" prefWidth="991.0" style="-fx-background-color: transparent;" stylesheets="@../Styles/programStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -220,7 +222,7 @@
                                         </Label>
                                     </children>
                                 </Pane>
-                                <Button layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#backToLogin" prefHeight="25.0" prefWidth="123.0" style="-fx-background-color: transparent; -fx-border-radius: 1em; -fx-border-color: red; -fx-border-width: 1.5;" text="Cerrar sesión" textFill="WHITE">
+                                <Button fx:id="logOutButton" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#backToLogin" prefHeight="25.0" prefWidth="123.0" text="Cerrar sesion" textFill="WHITE">
                                     <font>
                                         <Font name="Segoe UI" size="12.0" />
                                     </font>
@@ -268,12 +270,12 @@
                                                 <Font name="Arial Bold" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="35.0" layoutY="339.0" prefHeight="28.0" prefWidth="123.0" text="User" textFill="WHITE">
+                                        <Label fx:id="userDisplayNameAlt" layoutX="35.0" layoutY="339.0" text="User" textFill="WHITE">
                                             <font>
                                                 <Font name="Segoe UI" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Button layoutX="414.0" layoutY="324.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: rgb(255,128,0); -fx-background-radius: .8em;" text="Cambiar" textFill="WHITE">
+                                        <Button layoutX="412.0" layoutY="324.0" mnemonicParsing="false" onAction="#openDisplayNameChange" prefHeight="31.0" prefWidth="66.0" style="-fx-background-radius: .8em;" styleClass="orangeButton" text="Cambiar" textFill="WHITE">
                                             <font>
                                                 <Font name="SansSerif Bold" size="12.0" />
                                             </font>
@@ -286,7 +288,7 @@
                                                 <Font name="Arial Bold" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="35.0" layoutY="409.0" prefHeight="28.0" prefWidth="123.0" text="Username" textFill="#888888">
+                                        <Label fx:id="userNameAlt" layoutX="35.0" layoutY="409.0" text="Username" textFill="#888888">
                                             <font>
                                                 <Font name="Segoe UI" size="18.0" />
                                             </font>
@@ -302,12 +304,12 @@
                                                 <Font name="Arial Bold" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="34.0" layoutY="543.0" prefHeight="28.0" prefWidth="123.0" text="Contraseña" textFill="WHITE">
+                                        <Label layoutX="34.0" layoutY="543.0" text="Contraseña" textFill="WHITE">
                                             <font>
                                                 <Font name="Segoe UI" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Button layoutX="413.0" layoutY="528.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: rgb(255,128,0); -fx-background-radius: .8em;" text="Cambiar" textFill="WHITE">
+                                        <Button layoutX="412.0" layoutY="527.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-radius: .8em;" styleClass="orangeButton" text="Cambiar" textFill="WHITE">
                                             <font>
                                                 <Font name="SansSerif Bold" size="12.0" />
                                             </font>
@@ -315,7 +317,7 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </Button>
-                                        <Button fx:id="editProfilePicture" layoutX="60.0" layoutY="220.0" mnemonicParsing="false" onAction="#handlePfpEdit" prefWidth="63.0" text="Editar" textFill="#cc6ce7" />
+                                        <Button fx:id="editProfilePicture" layoutX="60.0" layoutY="220.0" mnemonicParsing="false" onAction="#handlePfpEdit" prefHeight="15.0" prefWidth="63.0" text="Editar" textFill="#cc6ce7" />
                                     </children>
                                 </Pane>
                                 <Pane fx:id="profilePicEditorView" prefHeight="661.0" prefWidth="826.0" visible="false">
@@ -334,12 +336,12 @@
                                                         <SVGPath content="M13,3V1a1,1,0,0,0-2,0V3a7.008,7.008,0,0,0-7,7v6a8,8,0,0,0,16,0V10A7.008,7.008,0,0,0,13,3Zm0,7a1,1,0,0,1-2,0V8a1,1,0,0,1,2,0Z" fill="WHITE" layoutX="98.0" layoutY="313.0" />
                                                         <SVGPath content="M23,9.545,20.57,7.07a1.5,1.5,0,1,0-2.14,2.1l1.3,1.327H13.5V4.266l1.327,1.3a1.5,1.5,0,1,0,2.1-2.14L14.458,1a3.5,3.5,0,0,0-2.444-1H12A3.493,3.493,0,0,0,9.545,1L7.07,3.43a1.5,1.5,0,1,0,2.1,2.14L10.5,4.265V10.5H4.266l1.3-1.327a1.5,1.5,0,1,0-2.14-2.1L1,9.542a3.5,3.5,0,0,0-1,2.444V12H0a3.493,3.493,0,0,0,1,2.454L3.43,16.93a1.5,1.5,0,1,0,2.14-2.1L4.265,13.5H10.5v6.239l-1.327-1.3a1.5,1.5,0,1,0-2.1,2.14l2.472,2.43a3.521,3.521,0,0,0,4.913,0l2.475-2.433a1.5,1.5,0,1,0-2.1-2.14l-1.327,1.3V13.5h6.234l-1.3,1.327a1.5,1.5,0,1,0,2.14,2.1L23,14.458a3.521,3.521,0,0,0,0-4.913Z" fill="WHITE" layoutX="165.0" layoutY="313.0" />
                                                         <SVGPath content="M10.561,13.439c.586,.585,.586,1.536,0,2.121l-5.439,5.439h2.379c.828,0,1.5,.671,1.5,1.5s-.672,1.5-1.5,1.5H3.5c-1.93,0-3.5-1.57-3.5-3.5v-4c0-.829,.672-1.5,1.5-1.5s1.5,.671,1.5,1.5v2.379l5.439-5.439c.586-.586,1.535-.586,2.121,0ZM20.5,0h-4c-.828,0-1.5,.671-1.5,1.5s.672,1.5,1.5,1.5h2.379l-5.439,5.439c-.586,.585-.586,1.536,0,2.121,.293,.293,.677,.439,1.061,.439s.768-.146,1.061-.439l5.439-5.439v2.379c0,.829,.672,1.5,1.5,1.5s1.5-.671,1.5-1.5V3.5c0-1.93-1.57-3.5-3.5-3.5Z" fill="WHITE" layoutX="132.0" layoutY="313.0" />
-                                                        <SVGPath content="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z" fill="#535353" layoutX="256.0" layoutY="8.0" onMouseClicked="#closeProfilePicEditor" style="-fx-scale-x: 1.3; -fx-scale-y: 1.3;">
+                                                        <SVGPath content="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z" fill="#535353" layoutX="256.0" layoutY="8.0" onMouseClicked="#closeProfilePicEditor" style="-fx-scale-x: 1.3; -fx-scale-y: 1.3;" styleClass="closeButton">
                                                             <cursor>
                                                                 <Cursor fx:constant="HAND" />
                                                             </cursor>
                                                         </SVGPath>
-                                                        <Button layoutX="94.0" layoutY="349.0" mnemonicParsing="false" onAction="#updatePfp" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: rgb(255,128,0); -fx-background-radius: .5em;" text="Aplicar" textFill="WHITE">
+                                                        <Button layoutX="94.0" layoutY="349.0" mnemonicParsing="false" onAction="#updatePfp" prefHeight="24.0" prefWidth="100.0" style="-fx-background-radius: .5em;" styleClass="orangeButton" text="Aplicar" textFill="WHITE">
                                                             <font>
                                                                 <Font name="Segoe UI Bold" size="14.0" />
                                                             </font>
@@ -353,6 +355,51 @@
                                         </Pane>
                                     </children>
                                 </Pane>
+                        <Pane fx:id="displayNameChangeView" layoutX="10.0" layoutY="10.0" prefHeight="661.0" prefWidth="826.0" visible="false">
+                           <children>
+                              <Pane fx:id="displayNameChange" layoutX="255.0" layoutY="229.0" prefHeight="204.0" prefWidth="316.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                                 <children>
+                                    <Pane fx:id="displayNameChangeContent" prefHeight="204.0" prefWidth="316.0">
+                                       <children>
+                                          <SVGPath content="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z" fill="#535353" layoutX="281.0" layoutY="10.0" onMouseClicked="#closeDisplayNameChange" style="-fx-scale-x: 1.3; -fx-scale-y: 1.3;" styleClass="closeButton">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </SVGPath>
+                                          <TextField fx:id="newDisplayName" layoutX="32.0" layoutY="97.0" prefHeight="37.0" prefWidth="252.0" styleClass="inputField">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TextField>
+                                          <Text fill="WHITE" fontSmoothingType="LCD" layoutX="32.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" wrappingWidth="68.0">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <Label layoutX="88.0" layoutY="15.0" prefHeight="31.0" prefWidth="142.0" style="-fx-alignment: center;" text="Nuevo Usuario" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="updateDisplayName" layoutX="109.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleDisplayNameChangeRequest" prefHeight="24.0" prefWidth="100.0" style="-fx-background-radius: .5em;" styleClass="orangeButton" text="Aplicar" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="14.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Text fx:id="displayNameCheck" fill="#c75a5a" fontSmoothingType="LCD" layoutX="100.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="179.20001220703125">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
                             </children>
                         </Pane>
                     </children>

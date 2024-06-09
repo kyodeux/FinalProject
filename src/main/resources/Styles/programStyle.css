@@ -1,5 +1,13 @@
-#contentDisplay{
-    -fx-background-color : white;
+.orangeButton:hover{
+    
+}
+
+.orangeButton{
+    -fx-background-color : rgb(255, 128, 0);
+}
+
+.orangeButton:hover{
+    -fx-background-color : rgb(254,82,2);
 }
 
 .menuButton{
@@ -7,9 +15,33 @@
     -fx-bacground-radius : 1em;
 }
 
-#editProfilePicture:hover{
-    -fx-background-color : #CC6CE7;
+.inputField:focused{
+    -fx-border-color : rgb(255, 128, 0);
+    -fx-border-width : 2;
+}
+
+.inputField{
+    -fx-background-color : rgb(20, 20, 20);
+    -fx-border-color :  #292e35;
+    -fx-border-radius :  .5em;
+    -fx-background-radius : .5em;
     -fx-text-fill : white;
+}
+
+.closeButton:hover{
+    -fx-fill : white;
+}
+
+#logOutButton:hover{
+    -fx-background-color : red;
+}
+
+#logOutButton{
+    -fx-background-color :  transparent;
+    -fx-background-radius : 1em;
+    -fx-border-radius :  1em;
+    -fx-border-color :  red;
+    -fx-border-width :  1.5;
 }
 
 #editProfilePicture{
@@ -18,4 +50,13 @@
     -fx-border-color :  #CC6CE7;
     -fx-border-radius : 1em;
     -fx-text-fill : #CC6CE7;
+}
+
+#contentDisplay{
+    -fx-background-color : white;
+}
+
+#editProfilePicture:hover{
+    -fx-background-color : #CC6CE7;
+    -fx-text-fill : white;
 }

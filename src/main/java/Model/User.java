@@ -4,9 +4,9 @@ import org.json.JSONObject;
 
 public class User extends NodeContainer {
 
-    private final String displayName;
-    private final String password;
-    private String userName;
+    private String displayName;
+    private String password;
+    private final String userName;
     private boolean isAdmin;
 
     public String getDisplayName() {
@@ -25,10 +25,14 @@ public class User extends NodeContainer {
         return isAdmin;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
+    public void setPassword(String newPassword){
+        this.password = newPassword;
+    }
+    
     public void setAdministrador(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }

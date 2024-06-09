@@ -2,17 +2,26 @@ package Controllers;
 
 import Model.Animate.EasingStyle;
 import Model.Components.ImageCropper;
+import Model.Components.UsernameChecker;
 import Model.User;
-import java.io.*;
-import javafx.animation.*;
+import java.io.File;
+import java.io.IOException;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.*;
-import javafx.scene.layout.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
@@ -21,7 +30,7 @@ public class Program_Handler {
 
     private User user;
 
-    //Setup
+    // <editor-fold defaultstate="collapsed" desc="Setup FXML variables">
     @FXML
     private AnchorPane background;
     @FXML
@@ -48,7 +57,33 @@ public class Program_Handler {
     private Label userNameIcon;
     @FXML
     private Label userTypeIcon;
-
+    @FXML
+    private Label userDisplayNameAlt;
+    @FXML
+    private Label userNameAlt;
+    @FXML
+    private Pane profileView;
+    @FXML
+    private Pane profileViewContent;
+    @FXML
+    private Pane profilePicEditorView;
+    @FXML
+    private Pane profilePicEditor;
+    @FXML
+    private Pane profilePicEditorContent;
+    @FXML
+    private Pane displayNameChangeView;
+    @FXML
+    private Pane displayNameChange;
+    @FXML
+    private Pane displayNameChangeContent;
+    @FXML
+    private TextField newDisplayName;
+    @FXML
+    private Text displayNameCheck;
+    
+    //</editor-fold>
+    
     private File profilePicFile;
 
     public void setup(User user) {
@@ -61,6 +96,9 @@ public class Program_Handler {
         userDisplayName.setText(user.getDisplayName());
         userName.setText("@" + user.getUserName());
 
+        userDisplayNameAlt.setText(user.getDisplayName());
+        userNameAlt.setText(user.getUserName());
+        
         Image pfp = new Image(profilePicFile.toURI().toString());
         profilePicture.setImage(pfp);
         profilePictureIcon.setImage(pfp);
@@ -89,6 +127,12 @@ public class Program_Handler {
         }
 
         cropper = new ImageCropper(viewport, backgroundView);
+        
+        newDisplayName.textProperty().addListener((observable, oldValue, newValue) -> {
+            displayNameCheck.setText(
+                UsernameChecker.check(newDisplayName.getText())
+            );
+        });
     }
 
     public void playWelcomeAnimation() {
@@ -189,19 +233,9 @@ public class Program_Handler {
 
         animation.play();
     }
-
-    //Profile 
-    @FXML
-    private Pane profileView;
-    @FXML
-    private Pane profileViewContent;
-    @FXML
-    private Pane profilePicEditorView;
-    @FXML
-    private Pane profilePicEditor;
-    @FXML
-    private Pane profilePicEditorContent;
-
+    
+    //Pfp Editor
+    
     private ImageCropper cropper;
 
     public void handlePfpEdit() {
@@ -220,9 +254,73 @@ public class Program_Handler {
     }
 
     public void openProfilePicEditor() {
+        openPopMenu(
+                profileViewContent, 
+                profilePicEditorView, 
+                profilePicEditor, 
+                profilePicEditorContent
+        );
+    }
+
+    public void closeProfilePicEditor() {
+        closePopMenu(
+                profileViewContent, 
+                profilePicEditorView, 
+                profilePicEditor, 
+                profilePicEditorContent
+        );
+    }
+
+    public void updatePfp() {
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(cropper.getCroppedImage(), null), "png", profilePicFile);
+
+            Image pfp = new Image(profilePicFile.toURI().toString());
+            profilePicture.setImage(pfp);
+            profilePictureIcon.setImage(pfp);
+        } catch (IOException e) {}
+
+        closeProfilePicEditor();
+    }
+
+    //--displayName Editor
+    
+    public void openDisplayNameChange(){
+        openPopMenu(
+                profileViewContent,
+                displayNameChangeView,
+                displayNameChange,
+                displayNameChangeContent
+        );
+    }
+    
+    public void closeDisplayNameChange(){
+        newDisplayName.setText("");
+        displayNameCheck.setText("");
+        closePopMenu(
+                profileViewContent,
+                displayNameChangeView,
+                displayNameChange,
+                displayNameChangeContent
+        );
+    }
+    
+    public void handleDisplayNameChangeRequest(){
+        String current = newDisplayName.getText();
+        if (current.isBlank()){return;}
+        if (!UsernameChecker.check(current).equals("")){return;}
+        
+        user.setDisplayName(current);
+        userDisplayName.setText(user.getDisplayName());
+        userDisplayNameAlt.setText(user.getDisplayName());
+        
+        closeDisplayNameChange();
+    }
+    
+    public void openPopMenu(Pane menu, Pane view, Pane popMenu, Pane popMenuContent){
         ColorAdjust colorAdjust = new ColorAdjust();
-        profileViewContent.setEffect(colorAdjust);
-        profilePicEditorView.setVisible(true);
+        menu.setEffect(colorAdjust);
+        view.setVisible(true);
 
         Timeline brightnessAnimation = new Timeline(
                 new KeyFrame(Duration.ZERO,
@@ -233,12 +331,12 @@ public class Program_Handler {
                 ));
         Timeline sizeAnimation = new Timeline(
                 new KeyFrame(Duration.ZERO,
-                        new KeyValue(profilePicEditor.scaleXProperty(), .5),
-                        new KeyValue(profilePicEditor.scaleYProperty(), .5)
+                        new KeyValue(popMenu.scaleXProperty(), .5),
+                        new KeyValue(popMenu.scaleYProperty(), .5)
                 ),
                 new KeyFrame(Duration.millis(300),
-                        new KeyValue(profilePicEditor.scaleXProperty(), 1, EasingStyle.OutSine),
-                        new KeyValue(profilePicEditor.scaleYProperty(), 1, EasingStyle.OutSine)
+                        new KeyValue(popMenu.scaleXProperty(), 1, EasingStyle.OutSine),
+                        new KeyValue(popMenu.scaleYProperty(), 1, EasingStyle.OutSine)
                 )
         );
 
@@ -246,13 +344,12 @@ public class Program_Handler {
         sizeAnimation.play();
 
         sizeAnimation.setOnFinished((ActionEvent e) -> {
-            profilePicEditorContent.setVisible(true);
+            popMenuContent.setVisible(true);
         });
     }
-
-    public void closeProfilePicEditor() {
-        profilePicEditorContent.setVisible(false);
-        ColorAdjust colorAdjust = (ColorAdjust) profileViewContent.getEffect();
+    public void closePopMenu(Pane menu, Pane view, Pane popMenu, Pane popMenuContent){
+        popMenuContent.setVisible(false);
+        ColorAdjust colorAdjust = (ColorAdjust) menu.getEffect();
 
         Timeline brightnessAnimation = new Timeline(
                 new KeyFrame(Duration.ZERO,
@@ -263,12 +360,12 @@ public class Program_Handler {
                 ));
         Timeline sizeAnimation = new Timeline(
                 new KeyFrame(Duration.ZERO,
-                        new KeyValue(profilePicEditor.scaleXProperty(), 1),
-                        new KeyValue(profilePicEditor.scaleYProperty(), 1)
+                        new KeyValue(popMenu.scaleXProperty(), 1),
+                        new KeyValue(popMenu.scaleYProperty(), 1)
                 ),
                 new KeyFrame(Duration.millis(200),
-                        new KeyValue(profilePicEditor.scaleXProperty(), .5, EasingStyle.OutSine),
-                        new KeyValue(profilePicEditor.scaleYProperty(), .5, EasingStyle.OutSine)
+                        new KeyValue(popMenu.scaleXProperty(), .5, EasingStyle.OutSine),
+                        new KeyValue(popMenu.scaleYProperty(), .5, EasingStyle.OutSine)
                 )
         );
 
@@ -276,26 +373,35 @@ public class Program_Handler {
         sizeAnimation.play();
 
         sizeAnimation.setOnFinished((ActionEvent e) -> {
-            profilePicEditorView.setVisible(false);
-            profileViewContent.setEffect(null);
+            view.setVisible(false);
+            menu.setEffect(null);
         });
     }
-
-    public void updatePfp() {
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(cropper.getCroppedImage(), null), "png", profilePicFile);
-
-            Image pfp = new Image(profilePicFile.toURI().toString());
-            profilePicture.setImage(pfp);
-            profilePictureIcon.setImage(pfp);
-        } catch (IOException e) {
-        }
-
-        closeProfilePicEditor();
-    }
-
+    
     //Logic
     public void backToLogin() {
-        Main.backToLogin();
+        double targetWidth = 400;
+        double targetHeight = 535;
+
+        double widthScale = targetWidth / background.getWidth();
+        double heightScale = targetHeight / background.getHeight();
+
+        content.setVisible(false);
+
+        Timeline animation = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(background.scaleXProperty(), background.getScaleX()),
+                        new KeyValue(background.scaleYProperty(), background.getScaleX())
+                ),
+                new KeyFrame(Duration.millis(300),
+                        new KeyValue(background.scaleXProperty(), widthScale, EasingStyle.OutSine),
+                        new KeyValue(background.scaleYProperty(), heightScale, EasingStyle.OutSine)
+                ));
+        
+        animation.play();
+        animation.setOnFinished((ActionEvent e) -> {
+            Main.backToLogin();
+        });
+        
     }
 }

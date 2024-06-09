@@ -1,17 +1,26 @@
 package Controllers;
 
-import Model.*;
-import java.io.*;
+import Model.CircularQueue;
+import Model.User;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.stage.*;
-import org.json.*;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Main extends Application {
-
     private static Stage stage;
     private static Scene currentProgramUI;
     private static Program_Handler programHandler;
@@ -41,8 +50,7 @@ public class Main extends Application {
                 pen.write(usersJSON.toString(4));
                 pen.close();
             }
-        } catch (IOException e) {
-        }
+        } catch (IOException e) {}
     }
 
     public static void loadUsers() {
@@ -66,8 +74,7 @@ public class Main extends Application {
 
             } catch (IOException ex) {
             }
-        } catch (FileNotFoundException e) {
-        }
+        } catch (FileNotFoundException e) {}
 
         JSONArray usersJSON = new JSONArray(builder.toString());
         Iterator<Object> iterator = usersJSON.iterator();
@@ -109,8 +116,7 @@ public class Main extends Application {
 
             programHandler = controller;
             currentProgramUI = scene;
-        } catch (IOException e) {
-        }
+        } catch (IOException e) {}
     }
 
     public static void openProgram() {
