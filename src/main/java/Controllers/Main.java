@@ -38,12 +38,7 @@ public class Main extends Application {
             }
             
             if (!fileExists){return;}
-            JSONArray usersJSON = new JSONArray();
-            
-            while(userList.length() > 0){
-                User currentUser = (User) userList.pop();
-                usersJSON.put(currentUser.toJSON());
-            }
+            JSONArray usersJSON = userList.toJSON();
             
             try{
                 PrintWriter pen;
@@ -81,7 +76,7 @@ public class Main extends Application {
         while (iterator.hasNext()){
             User currentUser = new User((JSONObject) iterator.next());
             userList.push(currentUser);
-            userCatalog.put(currentUser.getUser(), currentUser);
+            userCatalog.put(currentUser.getUserName(), currentUser);
         }
     }
     
@@ -120,9 +115,9 @@ public class Main extends Application {
         double previusWidth = stage.getWidth();
         double previusHeight = stage.getHeight();
         stage.setScene(currentProgramUI);
-        
         stage.setX(stage.getX() + previusWidth / 2 - stage.getWidth() / 2);
         stage.setY(stage.getY() + previusHeight / 2 - stage.getHeight() / 2);
+        programHandler.init();
         programHandler.playWelcomeAnimation();
     }
     public static void backToLogin(){

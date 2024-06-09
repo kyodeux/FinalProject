@@ -2,6 +2,8 @@ package Controllers;
 
 import Model.Animate.EasingStyle;
 import Model.User;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -9,16 +11,19 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.imageio.ImageIO;
 import org.json.JSONException;
 
 public class LogIn_SignUp_Handler {
@@ -119,7 +124,23 @@ public class LogIn_SignUp_Handler {
         indexedUser = newUser;
         
         Main.userList.push(newUser);
-        Main.userCatalog.put(newUser.getUser(), newUser);
+        Main.userCatalog.put(newUser.getUserName(), newUser);
+        
+        //Crating default profile picture
+        
+        File userDir = new File(System.getProperty("user.dir") 
+                + "/assets/users/" + newUser.getUserName());
+        
+        if (!userDir.exists()){
+            userDir.mkdir();
+        }
+
+        File outputFile = new File(userDir.getAbsolutePath() + "\\profilePicture.png");        
+        Image image = new Image(getClass().getResource("/Assets/defaultProfilePic.png").toExternalForm());
+        
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", outputFile);
+        } catch (IOException e) {}
         
         Platform.runLater(() -> {
             animateTransition();
@@ -144,6 +165,7 @@ public class LogIn_SignUp_Handler {
     }
 
     public void openLogIn(MouseEvent e) {
+        resetInput();
         Platform.runLater(() -> {
             logIn.setVisible(true);
             signUp.setVisible(false);
@@ -151,6 +173,7 @@ public class LogIn_SignUp_Handler {
     }
 
     public void openSignUp(MouseEvent e) {
+        resetInput();
         Platform.runLater(() -> {
             signUp.setVisible(true);
             logIn.setVisible(false);

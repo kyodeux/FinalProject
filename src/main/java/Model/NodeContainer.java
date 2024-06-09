@@ -1,6 +1,10 @@
 package Model;
 
-public class NodeContainer {
+import org.json.JSONObject;
+
+public abstract class NodeContainer {
     public NodeContainer next;
     public NodeContainer prev;
+    
+    public abstract JSONObject toJSON();
 }

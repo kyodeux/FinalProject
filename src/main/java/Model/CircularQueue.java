@@ -1,5 +1,7 @@
 package Model;
 
+import org.json.JSONArray;
+
 public class CircularQueue {
     public boolean empty(){return first == null;}
     public int length(){
@@ -87,6 +89,13 @@ public class CircularQueue {
             QueueListener listener = (QueueListener) listeners.peekAt(i);
             listener.onNodeAdded(added);
         }
+    }
+    
+    public JSONArray toJSON(){
+        JSONArray data = new JSONArray();
+        while(length() > 0){data.put(pop().toJSON());}
+        
+        return data;
     }
     
     private CircularQueue listeners;

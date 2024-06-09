@@ -1,0 +1,22 @@
+#contentDisplay{
+    -fx-background-color : white;
+}
+
+.menuButton{
+    -fx-bacground-color : white;
+    -fx-bacground-radius : 1em;
+}
+
+#editProfilePicture:hover{
+    -fx-background-color : #CC6CE7;
+    -fx-text-fill : white;
+}
+
+#editProfilePicture{
+    -fx-background-color : transparent;
+    -fx-background-radius : 1em;
+    -fx-border-color :  #CC6CE7;
+    -fx-border-radius : 1em;
+    -fx-text-fill : #CC6CE7;
+}
+

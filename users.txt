@@ -1,32 +1,26 @@
 [
     {
         "password": "poto",
+        "displayName": "Adrain Cruz",
         "isAdmin": true,
-        "userName": "Adrain Cruz",
-        "user": "adrian@admin"
+        "userName": "adriancruz"
     },
     {
         "password": "poto",
+        "displayName": "Kyo",
         "isAdmin": true,
-        "userName": "Kyo",
-        "user": "kyo@admin"
+        "userName": "kyodeux"
     },
     {
         "password": "hailHitler",
+        "displayName": "SrChris",
         "isAdmin": true,
-        "userName": "SrChris",
-        "user": "chris@admin"
+        "userName": "chris"
     },
     {
-        "password": "123",
+        "password": "poto",
+        "displayName": "juan",
         "isAdmin": false,
-        "userName": "poto",
-        "user": "poto"
-    },
-    {
-        "password": "123",
-        "isAdmin": false,
-        "userName": "nose",
-        "user": "nose"
+        "userName": "juan"
     }
 ]
