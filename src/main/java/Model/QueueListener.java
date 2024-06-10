@@ -8,7 +8,5 @@ public class QueueListener extends NodeContainer {
     public void onNodeRemoved(NodeContainer nodeRemoved) {};
     
     @Override
-    public JSONObject toJSON() {
-        return null;
-    }
+    public JSONObject toJSON (  ) { return null; }
 }

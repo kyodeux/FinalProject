@@ -4,21 +4,17 @@ import org.json.JSONArray;
 
 public class CircularQueue {
 
-    public boolean empty() {
-        return first == null;
-    }
+    public boolean empty (  ) { return first == null; }
 
     public int length() {
-        if (first == null) {
-            return 0;
-        }
+        if ( first == null ) { return 0; }
 
         int count = 0;
         NodeContainer current = first;
         do {
             count++;
             current = current.next;
-        } while (current != first);
+        } while ( current != first );
 
         return count;
     }

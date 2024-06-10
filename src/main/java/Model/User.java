@@ -9,42 +9,34 @@ public class User extends NodeContainer {
     private final String userName;
     private boolean isAdmin;
 
-    public String getDisplayName() {
-        return displayName;
-    }
+    public String getDisplayName (  ) { return displayName; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword (  ) { return password; }
 
-    public String getUserName() {
-        return userName;
-    }
+    public String getUserName (  ) { return userName; }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
+    public boolean isAdmin (  ) { return isAdmin; }
 
-    public void setDisplayName(String displayName) {
+    public void setDisplayName ( String displayName ) {
         this.displayName = displayName;
     }
 
-    public void setPassword(String newPassword){
+    public void setPassword ( String newPassword ){
         this.password = newPassword;
     }
     
-    public void setAdministrador(boolean isAdmin) {
+    public void setAdministrador ( boolean isAdmin ) {
         this.isAdmin = isAdmin;
     }
 
-    public User(String userName, String password, String displayName) {
+    public User ( String userName, String password, String displayName ) {
         this.displayName = displayName;
         this.password = password;
         this.userName = userName;
         this.isAdmin = false;
     }
 
-    public User(JSONObject data) {
+    public User ( JSONObject data ) {
         this.displayName = data.getString("displayName");
         this.password = data.getString("password");
         this.userName = data.getString("userName");
@@ -52,7 +44,7 @@ public class User extends NodeContainer {
     }
 
     @Override
-    public JSONObject toJSON() {
+    public JSONObject toJSON (  ) {
         JSONObject data = new JSONObject();
 
         data.put("displayName", displayName);
