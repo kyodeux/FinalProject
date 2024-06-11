@@ -1,9 +1,15 @@
 package Controllers;
 
 import Model.Animate.EasingStyle;
+import Model.Components.InputChecker;
 import Model.User;
+import com.bastiaanjansen.otp.HMACAlgorithm;
+import com.bastiaanjansen.otp.SecretGenerator;
+import com.bastiaanjansen.otp.TOTPGenerator;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
@@ -44,9 +51,18 @@ public class LogIn_SignUp_Handler {
     private TextField signup_User;
     @FXML
     private PasswordField signup_Password;
-
+    @FXML
+    private Text userNameCheck;
+    @FXML
+    private AnchorPane passwordRecovery;
+    @FXML
+    private TextField passCodeInput;
+    
+    private String lastPassCodeInput = "";
+    private boolean setupDone = false;
     private User indexedUser;
 
+    
     private Stage stage;
     private double xOffset = 0;
     private double yOffset = 0;
@@ -74,8 +90,7 @@ public class LogIn_SignUp_Handler {
         String user = login_User.getText();
         try {
             indexedUser = (User) Main.userCatalog.get(user);
-        } catch (JSONException e) {
-        }
+        } catch (JSONException e) {}
 
         if (indexedUser == null) {
             login_User.setStyle("-fx-border-color : #C17B61");
@@ -94,10 +109,11 @@ public class LogIn_SignUp_Handler {
         });
     }
 
-    public void handleSignup() {
+    public void handleSignup() throws URISyntaxException {
         signup_User.setStyle(null);
         signup_Password.setStyle(null);
-
+        userNameCheck.setText("");
+        
         if (signup_User.getText().isBlank()) {
             signup_User.setStyle("-fx-border-color : #C17B61");
         }
@@ -110,6 +126,13 @@ public class LogIn_SignUp_Handler {
             return;
         }
 
+        String checkResult = InputChecker.checkUsername(signup_User.getText());
+        
+        if (!checkResult.equals("")){
+            userNameCheck.setText(checkResult);
+            return;
+        }
+        
         String user = signup_User.getText();
         String password = signup_Password.getText();
         String userName = user;
@@ -125,7 +148,22 @@ public class LogIn_SignUp_Handler {
             return;
         }
 
-        User newUser = new User(user, password, userName);
+        
+        byte[] secret = SecretGenerator.generate();
+        TOTPGenerator totp = new TOTPGenerator.Builder(secret)
+                        .withHOTPGenerator(builder -> {
+                            builder.withPasswordLength(6);
+                            builder.withAlgorithm(HMACAlgorithm.SHA512);
+                        })
+                        .withPeriod(java.time.Duration.ofSeconds(30))
+                        .build();
+        
+        User newUser = new User(
+                user, 
+                password, 
+                userName, 
+                totp.getURI("FurinaGang", user).toString()
+        );
         indexedUser = newUser;
 
         Main.userList.push(newUser);
@@ -152,6 +190,71 @@ public class LogIn_SignUp_Handler {
         });
     }
 
+    public void openPassRecovery(){
+        login_User.setStyle(null);
+        
+        if (login_User.getText().isBlank()) {
+            login_User.setStyle("-fx-border-color : #C17B61");
+            return;
+        }
+
+        String user = login_User.getText();
+        try {
+            indexedUser = (User) Main.userCatalog.get(user);
+        } catch (JSONException e) {}
+        
+        if (indexedUser == null){
+            login_User.setStyle("-fx-border-color : #C17B61");
+
+            return;
+        }
+        
+        passwordRecovery.setVisible(true);
+        logIn.setVisible(false);
+        
+        if (setupDone){return;}
+        setupDone = true;
+        
+        passCodeInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            String passCode = passCodeInput.getText();
+            
+            if (lastPassCodeInput.equals(passCode)){return;}
+                
+            if (!InputChecker.checkPassCode(passCode)){
+                 passCodeInput.setText(lastPassCodeInput);
+            }else{
+                lastPassCodeInput = passCode;
+            }
+        });
+    }
+    
+    public void closePassRecovery(){
+        logIn.setVisible(true);
+        passwordRecovery.setVisible(false);
+    }
+    
+    public void verifyPassCode() throws URISyntaxException{
+        String passCode = passCodeInput.getText();
+        passCodeInput.setStyle(null);
+        if (passCode.length() < 6){
+            passCodeInput.setStyle("-fx-border-color : #C17B61;"
+                    + "-fx-alignment : center;");
+            return;
+        }
+        
+        TOTPGenerator totp = TOTPGenerator.fromURI(new URI(indexedUser.getAuthURI()));
+        
+        if (!passCode.equals(totp.now())){
+            passCodeInput.setStyle("-fx-border-color : #C17B61;"
+                    + "-fx-alignment : center;");
+            return;}
+        passwordRecovery.setVisible(false);
+        indexedUser.forgotPassword = true;
+        Platform.runLater(() -> {
+            animateTransition();
+        });
+    }
+    
     public void pressedDetected(MouseEvent e) {
         xOffset = e.getSceneX();
         yOffset = e.getSceneY();

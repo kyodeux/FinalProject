@@ -1,6 +1,6 @@
 package Controllers;
 
-import Model.CircularQueue;
+import Model.Utils.CircularQueue;
 import Model.User;
 import java.io.BufferedReader;
 import java.io.File;

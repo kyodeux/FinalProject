@@ -1,5 +1,6 @@
-package Model;
+package Model.Utils;
 
+import Model.Utils.NodeContainer;
 import org.json.JSONObject;
 
 public class QueueListener extends NodeContainer {

@@ -1,4 +1,4 @@
-package Model;
+package Model.Utils;
 
 import org.json.JSONArray;
 

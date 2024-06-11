@@ -1,26 +1,22 @@
 [
     {
+        "favorites": [],
         "password": "poto",
-        "displayName": "Adrain Cruz",
+        "authURI": "otpauth://totp/FurinaGang:santee?period=30&digits=6&secret=WXO4AAETNGASK62DOFBDEZHBM3B7I7BM&issuer=FurinaGang&algorithm=SHA512",
+        "displayName": "Santee",
         "isAdmin": true,
-        "userName": "adriancruz"
+        "history": [],
+        "userName": "santee",
+        "cart": []
     },
     {
+        "favorites": [],
         "password": "poto",
+        "authURI": "otpauth://totp/FurinaGang:santiago?period=30&digits=6&secret=5IUX53RKBOFJQYUNYCDRJLBHL5PUGNFZ&issuer=FurinaGang&algorithm=SHA512",
         "displayName": "Kyo",
-        "isAdmin": true,
-        "userName": "kyodeux"
-    },
-    {
-        "password": "hailHitler",
-        "displayName": "SrChris",
-        "isAdmin": true,
-        "userName": "chris"
-    },
-    {
-        "password": "poto",
-        "displayName": "juan",
         "isAdmin": false,
-        "userName": "juan"
+        "history": [],
+        "userName": "santiago",
+        "cart": []
     }
 ]

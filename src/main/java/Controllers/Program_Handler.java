@@ -2,13 +2,23 @@ package Controllers;
 
 import Model.Animate.EasingStyle;
 import Model.Components.ImageCropper;
-import Model.Components.UsernameChecker;
+import Model.Components.InputChecker;
 import Model.User;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,9 +91,23 @@ public class Program_Handler {
     private TextField newDisplayName;
     @FXML
     private Text displayNameCheck;
-    
+    @FXML
+    private Pane passwordChangeView;
+    @FXML
+    private Pane passwordChange;
+    @FXML
+    private Pane passwordChangeContent;
+    @FXML
+    private Pane passwordChangedMessage;
+    @FXML
+    private TextField oldPasswordInput;
+    @FXML
+    private TextField newPasswordInput;
+    @FXML
+    private TextField newPasswordConfirm;
+    @FXML
+    private ImageView totpQR;
     //</editor-fold>
-    
     private File profilePicFile;
 
     public void setup(User user) {
@@ -98,7 +122,7 @@ public class Program_Handler {
 
         userDisplayNameAlt.setText(user.getDisplayName());
         userNameAlt.setText(user.getUserName());
-        
+
         Image pfp = new Image(profilePicFile.toURI().toString());
         profilePicture.setImage(pfp);
         profilePictureIcon.setImage(pfp);
@@ -127,12 +151,24 @@ public class Program_Handler {
         }
 
         cropper = new ImageCropper(viewport, backgroundView);
-        
         newDisplayName.textProperty().addListener((observable, oldValue, newValue) -> {
-            displayNameCheck.setText(
-                UsernameChecker.check(newDisplayName.getText())
-            );
+            displayNameCheck.setText(InputChecker.checkDisplayName(newDisplayName.getText()));
         });
+        
+        try{
+            totpQR.setImage(generateQR(
+                user.getAuthURI(),
+                (int) totpQR.getFitWidth(),
+                (int) totpQR.getFitHeight()
+            ));
+        }catch(WriterException | IOException e){}
+        Rectangle clip2 = new Rectangle();
+        clip2.setWidth(totpQR.getFitWidth());
+        clip2.setHeight(totpQR.getFitWidth());
+        clip2.setArcHeight(totpQR.getFitWidth() * .3);
+        clip2.setArcWidth(totpQR.getFitWidth() * .3);
+        
+        totpQR.setClip(clip2);
     }
 
     public void playWelcomeAnimation() {
@@ -227,15 +263,18 @@ public class Program_Handler {
                         )
                 );
 
+                contentAnimation.setOnFinished((ActionEvent x) -> {
+                    if (!user.forgotPassword){return;}
+                    openPasswordChange();
+                });
                 contentAnimation.play();
             });
         });
 
         animation.play();
     }
-    
+
     //Pfp Editor
-    
     private ImageCropper cropper;
 
     public void handlePfpEdit() {
@@ -255,18 +294,18 @@ public class Program_Handler {
 
     public void openProfilePicEditor() {
         openPopMenu(
-                profileViewContent, 
-                profilePicEditorView, 
-                profilePicEditor, 
+                profileViewContent,
+                profilePicEditorView,
+                profilePicEditor,
                 profilePicEditorContent
         );
     }
 
     public void closeProfilePicEditor() {
         closePopMenu(
-                profileViewContent, 
-                profilePicEditorView, 
-                profilePicEditor, 
+                profileViewContent,
+                profilePicEditorView,
+                profilePicEditor,
                 profilePicEditorContent
         );
     }
@@ -278,14 +317,14 @@ public class Program_Handler {
             Image pfp = new Image(profilePicFile.toURI().toString());
             profilePicture.setImage(pfp);
             profilePictureIcon.setImage(pfp);
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
 
         closeProfilePicEditor();
     }
 
-    //--displayName Editor
-    
-    public void openDisplayNameChange(){
+    //displayName Change
+    public void openDisplayNameChange() {
         openPopMenu(
                 profileViewContent,
                 displayNameChangeView,
@@ -293,8 +332,8 @@ public class Program_Handler {
                 displayNameChangeContent
         );
     }
-    
-    public void closeDisplayNameChange(){
+
+    public void closeDisplayNameChange() {
         newDisplayName.setText("");
         displayNameCheck.setText("");
         closePopMenu(
@@ -304,20 +343,181 @@ public class Program_Handler {
                 displayNameChangeContent
         );
     }
-    
-    public void handleDisplayNameChangeRequest(){
+
+    public void handleDisplayNameChangeRequest() {
         String current = newDisplayName.getText();
-        if (current.isBlank()){return;}
-        if (!UsernameChecker.check(current).equals("")){return;}
-        
+        if (current.isBlank()) {
+            return;
+        }
+        if (!InputChecker.checkDisplayName(current).equals("")) {
+            return;
+        }
+
         user.setDisplayName(current);
         userDisplayName.setText(user.getDisplayName());
         userDisplayNameAlt.setText(user.getDisplayName());
-        
+
         closeDisplayNameChange();
     }
+
+    //password Change
+    private ScheduledExecutorService scheduler;
+
+    private final Runnable onPasswordChanged = () -> {
+        Platform.runLater(() -> {
+            passwordChangedMessage.setVisible(false);
+            ColorAdjust colorAdjust = (ColorAdjust) profileViewContent.getEffect();
+            Timeline sizeAnimation = new Timeline(
+                    new KeyFrame(Duration.ZERO,
+                            new KeyValue(passwordChange.scaleXProperty(), 1),
+                            new KeyValue(passwordChange.scaleYProperty(), 1)
+                    ),
+                    new KeyFrame(Duration.millis(300),
+                            new KeyValue(passwordChange.scaleXProperty(), .5, EasingStyle.OutSine),
+                            new KeyValue(passwordChange.scaleYProperty(), .5, EasingStyle.OutSine)
+                    )
+            );
+            
+            Timeline brightnessAnimation = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(colorAdjust.brightnessProperty(), -.4)
+                ),
+                new KeyFrame(Duration.millis(300),
+                        new KeyValue(colorAdjust.brightnessProperty(), 0, EasingStyle.OutSine)
+                ));
+            
+            sizeAnimation.play();
+            brightnessAnimation.play();
+            sizeAnimation.setOnFinished((ActionEvent e) -> {
+                
+                passwordChange.setLayoutX(255);
+                passwordChange.setLayoutY(148);
+                passwordChange.setPrefWidth(316);
+                passwordChange.setPrefHeight(366);
+                passwordChangeView.setVisible(false);
+                profileViewContent.setEffect(null);
+            });
+        });
+    };
+
+    private void resetPasswordFields(){
+        oldPasswordInput.setText("");
+        oldPasswordInput.setStyle(null);
+        newPasswordInput.setText("");
+        newPasswordInput.setStyle(null);
+        newPasswordConfirm.setText("");
+        newPasswordConfirm.setStyle(null);
+    }
     
-    public void openPopMenu(Pane menu, Pane view, Pane popMenu, Pane popMenuContent){
+    public void openPasswordChange() {
+        oldPasswordInput.setDisable(user.forgotPassword);
+        if (user.forgotPassword){
+            oldPasswordInput.setText(user.getPassword());
+        }
+        openPopMenu(
+                profileViewContent,
+                passwordChangeView,
+                passwordChange,
+                passwordChangeContent
+        );
+    }
+
+    public void closePasswordChange() {
+        resetPasswordFields();
+        
+        closePopMenu(
+                profileViewContent,
+                passwordChangeView,
+                passwordChange,
+                passwordChangeContent
+        );
+    }
+
+    public void handlePasswordChangeRequest() {
+        oldPasswordInput.setStyle(null);
+        newPasswordInput.setStyle(null);
+        newPasswordConfirm.setStyle(null);
+
+        boolean inputsFine = true;
+        if (oldPasswordInput.getText().isBlank() && !user.forgotPassword) {
+            oldPasswordInput.setStyle("-fx-border-color : #C17B61");
+            inputsFine = false;
+        }
+
+        if (newPasswordInput.getText().isBlank()) {
+            newPasswordInput.setStyle("-fx-border-color : #C17B61");
+            inputsFine = false;
+        }
+
+        if (newPasswordConfirm.getText().isBlank()) {
+            newPasswordConfirm.setStyle("-fx-border-color : #C17B61");
+            inputsFine = false;
+        }
+
+        if (!inputsFine) {
+            return;
+        }
+        if (!oldPasswordInput.getText().equals(user.getPassword()) && !user.forgotPassword) {
+            oldPasswordInput.setStyle("-fx-border-color : #C17B61");
+            return;
+        }
+        String newPassword = newPasswordInput.getText();
+
+        if (!newPasswordConfirm.getText().equals(newPassword)) {
+            newPasswordConfirm.setStyle("-fx-border-color : #C17B61");
+            return;
+        }
+        
+        resetPasswordFields();
+        user.setPassword(newPassword);
+        user.forgotPassword = false;
+        
+        scheduler = Executors.newScheduledThreadPool(1);
+        showPasswordChangedMessage();
+    }
+
+    public void showPasswordChangedMessage() {
+        passwordChangeContent.setVisible(false);
+        Timeline animation = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(passwordChange.prefWidthProperty(),
+                                passwordChange.getPrefWidth()
+                        ),
+                        new KeyValue(passwordChange.prefHeightProperty(),
+                                passwordChange.getHeight()
+                        ),
+                        new KeyValue(passwordChange.layoutXProperty(),
+                                passwordChange.getLayoutX()
+                        ),
+                        new KeyValue(passwordChange.layoutYProperty(),
+                                passwordChange.getLayoutY()
+                        )
+                ),
+                new KeyFrame(Duration.millis(700),
+                        new KeyValue(passwordChange.prefWidthProperty(),
+                                334, EasingStyle.InOutBack
+                        ),
+                        new KeyValue(passwordChange.prefHeightProperty(),
+                                151, EasingStyle.InOutBack
+                        ),
+                        new KeyValue(passwordChange.layoutXProperty(),
+                                246, EasingStyle.InOutBack
+                        ),
+                        new KeyValue(passwordChange.layoutYProperty(),
+                                255, EasingStyle.InOutBack
+                        )
+                )
+        );
+
+        animation.play();
+        animation.setOnFinished((ActionEvent e) -> {
+            passwordChangedMessage.setVisible(true);
+            scheduler.schedule(onPasswordChanged, 1300, TimeUnit.MILLISECONDS);
+            scheduler.shutdown();
+        });
+    }
+
+    public void openPopMenu(Pane menu, Pane view, Pane popMenu, Pane popMenuContent) {
         ColorAdjust colorAdjust = new ColorAdjust();
         menu.setEffect(colorAdjust);
         view.setVisible(true);
@@ -347,7 +547,8 @@ public class Program_Handler {
             popMenuContent.setVisible(true);
         });
     }
-    public void closePopMenu(Pane menu, Pane view, Pane popMenu, Pane popMenuContent){
+
+    public void closePopMenu(Pane menu, Pane view, Pane popMenu, Pane popMenuContent) {
         popMenuContent.setVisible(false);
         ColorAdjust colorAdjust = (ColorAdjust) menu.getEffect();
 
@@ -377,6 +578,23 @@ public class Program_Handler {
             menu.setEffect(null);
         });
     }
+
+    //TOTP System
+   
+    public Image generateQR(String data, int h, int w) throws WriterException, IOException {
+        String charset = new String(data.getBytes("UTF-8"), "UTF-8");
+
+        BitMatrix matrix = new MultiFormatWriter().encode(
+                charset,
+                BarcodeFormat.QR_CODE,
+                w,
+                h);
+
+        BufferedImage swingImage = MatrixToImageWriter.toBufferedImage(matrix);
+        Image image = SwingFXUtils.toFXImage(swingImage, null);
+        
+        return image;
+    }
     
     //Logic
     public void backToLogin() {
@@ -398,10 +616,10 @@ public class Program_Handler {
                         new KeyValue(background.scaleYProperty(), heightScale, EasingStyle.OutSine)
                 ));
         
+        if (scheduler != null){scheduler.shutdown();}
         animation.play();
         animation.setOnFinished((ActionEvent e) -> {
             Main.backToLogin();
         });
-        
     }
 }

@@ -4,14 +4,18 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -42,18 +46,18 @@
             <children>
                 <Pane fx:id="menuButtons" layoutY="15.0" prefHeight="632.0" prefWidth="166.0" stylesheets="@../Styles/programStyle.css">
                     <children>
-                        <VBox alignment="TOP_CENTER" layoutX="4.0" layoutY="14.0" prefHeight="343.0" prefWidth="157.0">
+                        <VBox alignment="TOP_CENTER" layoutX="4.0" layoutY="150.0" prefHeight="343.0" prefWidth="157.0">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
                             <children>
                                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="146.0" styleClass="menuButton">
                                     <children>
-                                        <Pane prefHeight="42.0" prefWidth="213.0" style="-fx-scale-x: .9; -fx-scale-y: .9; -fx-background-color: rgb(255,128,0); -fx-background-radius: 1.5em;">
+                                        <Pane prefHeight="42.0" prefWidth="213.0" style="-fx-scale-x: .9; -fx-scale-y: .9; -fx-background-color: #123F93; -fx-background-radius: 1.5em;">
                                             <children>
                                                 <Label layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Perfil" textAlignment="CENTER" textFill="WHITE">
                                                     <font>
-                                                        <Font name="Segoe UI" size="16.0" />
+                                                        <Font name="Corbel Bold" size="18.0" />
                                                     </font>
                                                 </Label>
                                                 <Pane prefHeight="42.0" prefWidth="49.0">
@@ -74,7 +78,7 @@
                                             <children>
                                                 <Label layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Dashboard" textAlignment="CENTER" textFill="#c8c8c8">
                                                     <font>
-                                                        <Font name="Segoe UI" size="16.0" />
+                                                        <Font name="Corbel" size="18.0" />
                                                     </font>
                                                 </Label>
                                                 <Pane prefHeight="42.0" prefWidth="49.0">
@@ -95,7 +99,7 @@
                                             <children>
                                                 <Label layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Administrar" textAlignment="CENTER" textFill="#c8c8c8">
                                                     <font>
-                                                        <Font name="Segoe UI" size="16.0" />
+                                                        <Font name="Corbel" size="18.0" />
                                                     </font>
                                                 </Label>
                                                 <Pane prefHeight="42.0" prefWidth="49.0">
@@ -121,7 +125,7 @@
                                             <children>
                                                 <Label layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Catalogo" textAlignment="CENTER" textFill="#c8c8c8">
                                                     <font>
-                                                        <Font name="Segoe UI" size="16.0" />
+                                                        <Font name="Corbel" size="18.0" />
                                                     </font>
                                                 </Label>
                                                 <Pane prefHeight="42.0" prefWidth="49.0">
@@ -142,7 +146,7 @@
                                             <children>
                                                 <Label layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Favoritos" textAlignment="CENTER" textFill="#c8c8c8">
                                                     <font>
-                                                        <Font name="Segoe UI" size="16.0" />
+                                                        <Font name="Corbel" size="18.0" />
                                                     </font>
                                                 </Label>
                                                 <Pane prefHeight="42.0" prefWidth="49.0">
@@ -163,7 +167,7 @@
                                             <children>
                                                 <Label layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Carrito" textAlignment="CENTER" textFill="#c8c8c8">
                                                     <font>
-                                                        <Font name="Segoe UI" size="16.0" />
+                                                        <Font name="Corbel" size="18.0" />
                                                     </font>
                                                 </Label>
                                                 <Pane prefHeight="42.0" prefWidth="49.0">
@@ -184,7 +188,7 @@
                                             <children>
                                                 <Label layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Historial" textAlignment="CENTER" textFill="#c8c8c8">
                                                     <font>
-                                                        <Font name="Segoe UI" size="16.0" />
+                                                        <Font name="Corbel" size="18.0" />
                                                     </font>
                                                 </Label>
                                                 <Pane prefHeight="42.0" prefWidth="49.0">
@@ -224,7 +228,7 @@
                                 </Pane>
                                 <Button fx:id="logOutButton" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#backToLogin" prefHeight="25.0" prefWidth="123.0" text="Cerrar sesion" textFill="WHITE">
                                     <font>
-                                        <Font name="Segoe UI" size="12.0" />
+                                        <Font name="Corbel Bold" size="12.0" />
                                     </font>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
@@ -232,6 +236,11 @@
                                 </Button>
                             </children>
                         </Pane>
+                  <ImageView fitHeight="135.0" fitWidth="135.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/appIcon.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </Pane>
                 <Pane fx:id="contentDisplay" layoutX="166.0" prefHeight="661.0" prefWidth="825.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em; -fx-border-radius: 1em;">
@@ -262,7 +271,7 @@
                                         </Label>
                                         <Label layoutX="35.0" layoutY="275.0" prefHeight="31.0" prefWidth="100.0" text="Publico" textFill="WHITE">
                                             <font>
-                                                <Font name="SansSerif Bold" size="20.0" />
+                                                <Font name="Segoe UI Bold" size="20.0" />
                                             </font>
                                         </Label>
                                         <Label layoutX="35.0" layoutY="313.0" prefHeight="31.0" prefWidth="142.0" text="NOMBRE PUBLICO" textFill="#888888">
@@ -272,7 +281,7 @@
                                         </Label>
                                         <Label fx:id="userDisplayNameAlt" layoutX="35.0" layoutY="339.0" text="User" textFill="WHITE">
                                             <font>
-                                                <Font name="Segoe UI" size="18.0" />
+                                                <Font name="Corbel Bold" size="17.0" />
                                             </font>
                                         </Label>
                                         <Button layoutX="412.0" layoutY="324.0" mnemonicParsing="false" onAction="#openDisplayNameChange" prefHeight="31.0" prefWidth="66.0" style="-fx-background-radius: .8em;" styleClass="orangeButton" text="Cambiar" textFill="WHITE">
@@ -290,26 +299,26 @@
                                         </Label>
                                         <Label fx:id="userNameAlt" layoutX="35.0" layoutY="409.0" text="Username" textFill="#888888">
                                             <font>
-                                                <Font name="Segoe UI" size="18.0" />
+                                                <Font name="Corbel Bold" size="17.0" />
                                             </font>
                                         </Label>
-                                        <Separator layoutX="35.0" layoutY="453.0" prefHeight="15.0" prefWidth="443.0" />
-                                        <Label layoutX="35.0" layoutY="478.0" prefHeight="31.0" prefWidth="150.0" text="Autenticacion" textFill="WHITE">
+                                        <Separator layoutX="34.0" layoutY="432.0" prefHeight="18.0" prefWidth="443.0" scaleY="0.5" />
+                                        <Label layoutX="35.0" layoutY="450.0" prefHeight="31.0" prefWidth="150.0" text="Autenticacion" textFill="WHITE">
                                             <font>
-                                                <Font name="SansSerif Bold" size="20.0" />
+                                                <Font name="Segoe UI Bold" size="20.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="34.0" layoutY="517.0" prefHeight="31.0" prefWidth="142.0" text="CREDENCIALES" textFill="#888888">
+                                        <Label layoutX="34.0" layoutY="489.0" prefHeight="31.0" prefWidth="142.0" text="CREDENCIALES" textFill="#888888">
                                             <font>
                                                 <Font name="Arial Bold" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="34.0" layoutY="543.0" text="Contraseña" textFill="WHITE">
+                                        <Label layoutX="34.0" layoutY="515.0" text="Contraseña" textFill="#888888">
                                             <font>
-                                                <Font name="Segoe UI" size="18.0" />
+                                                <Font name="Corbel Bold" size="17.0" />
                                             </font>
                                         </Label>
-                                        <Button layoutX="412.0" layoutY="527.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-radius: .8em;" styleClass="orangeButton" text="Cambiar" textFill="WHITE">
+                                        <Button layoutX="412.0" layoutY="500.0" mnemonicParsing="false" onAction="#openPasswordChange" prefHeight="31.0" prefWidth="66.0" style="-fx-background-radius: .8em;" styleClass="orangeButton" text="Cambiar" textFill="WHITE">
                                             <font>
                                                 <Font name="SansSerif Bold" size="12.0" />
                                             </font>
@@ -317,7 +326,60 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </Button>
-                                        <Button fx:id="editProfilePicture" layoutX="60.0" layoutY="220.0" mnemonicParsing="false" onAction="#handlePfpEdit" prefHeight="15.0" prefWidth="63.0" text="Editar" textFill="#cc6ce7" />
+                                        <Button fx:id="editProfilePicture" layoutX="60.0" layoutY="220.0" mnemonicParsing="false" onAction="#handlePfpEdit" prefHeight="15.0" prefWidth="63.0" text="Editar" textFill="#123f93">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Corbel" size="12.0" />
+                                 </font></Button>
+                              <Pane layoutX="516.0" layoutY="259.0" prefHeight="383.0" prefWidth="288.0" style="-fx-background-color: rgb(43, 45, 49); -fx-background-radius: 1.5em;">
+                                 <children>
+                                    <Text fill="#dcdcdc" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sigue estos sencillos pasos y podras acceder a tu cuenta si olvidas la contraseña:" textAlignment="CENTER" wrappingWidth="260.73779296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#c1ddb3" layoutX="26.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1  -  Descarga la app de autenticacion de tu preferencia &gt; Google Authenticator." wrappingWidth="235.17529296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#c1ddb3" layoutX="26.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2  -   Localiza la opcion para agregar una nueva cuenta." wrappingWidth="235.17529296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#c1ddb3" layoutX="26.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3  -   Escanea el código QR." wrappingWidth="235.17529296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#c1ddb3" layoutX="26.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4  -   Todo listo ;)" wrappingWidth="235.17529296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <ImageView fx:id="totpQR" fitHeight="160.0" fitWidth="160.0" layoutX="64.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Pane>
+                              <Label layoutX="516.0" layoutY="230.0" prefHeight="31.0" prefWidth="166.0" text="PROTEGE TU CUENTA" textFill="#888888">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="34.0" layoutY="574.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" style="-fx-background-color: transparent; -fx-border-color: red; -fx-border-radius: .5em; -fx-background-radius: .5em; -fx-border-width: 1.5;" text="Elimar cuenta" textFill="WHITE">
+                                 <font>
+                                    <Font name="Corbel" size="14.0" />
+                                 </font>
+                              </Button>
                                     </children>
                                 </Pane>
                                 <Pane fx:id="profilePicEditorView" prefHeight="661.0" prefWidth="826.0" visible="false">
@@ -355,11 +417,11 @@
                                         </Pane>
                                     </children>
                                 </Pane>
-                        <Pane fx:id="displayNameChangeView" layoutX="10.0" layoutY="10.0" prefHeight="661.0" prefWidth="826.0" visible="false">
+                        <Pane fx:id="displayNameChangeView" prefHeight="661.0" prefWidth="826.0" visible="false">
                            <children>
                               <Pane fx:id="displayNameChange" layoutX="255.0" layoutY="229.0" prefHeight="204.0" prefWidth="316.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
                                  <children>
-                                    <Pane fx:id="displayNameChangeContent" prefHeight="204.0" prefWidth="316.0">
+                                    <Pane fx:id="displayNameChangeContent" prefHeight="204.0" prefWidth="316.0" visible="false">
                                        <children>
                                           <SVGPath content="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z" fill="#535353" layoutX="281.0" layoutY="10.0" onMouseClicked="#closeDisplayNameChange" style="-fx-scale-x: 1.3; -fx-scale-y: 1.3;" styleClass="closeButton">
                                              <cursor>
@@ -394,6 +456,64 @@
                                                 <Font name="Arial" size="15.0" />
                                              </font>
                                           </Text>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="passwordChangeView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                           <children>
+                              <Pane fx:id="passwordChange" layoutX="255.0" layoutY="148.0" prefHeight="366.0" prefWidth="316.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                                 <children>
+                                    <Pane fx:id="passwordChangeContent" prefHeight="366.0" prefWidth="316.0" visible="false">
+                                       <children>
+                                          <SVGPath content="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z" fill="#535353" layoutX="281.0" layoutY="10.0" onMouseClicked="#closePasswordChange" style="-fx-scale-x: 1.3; -fx-scale-y: 1.3;" styleClass="closeButton">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </SVGPath>
+                                          <Text fill="WHITE" fontSmoothingType="LCD" layoutX="32.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vieja contraseña" wrappingWidth="166.39999999999998">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <Label layoutX="64.0" layoutY="15.0" prefHeight="31.0" prefWidth="189.0" style="-fx-alignment: center;" text="Cambio Contraseña" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Button layoutX="109.0" layoutY="316.0" mnemonicParsing="false" onAction="#handlePasswordChangeRequest" prefHeight="24.0" prefWidth="100.0" style="-fx-background-radius: .5em;" styleClass="orangeButton" text="Aplicar" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="14.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Text fill="WHITE" fontSmoothingType="LCD" layoutX="32.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva contraseña" wrappingWidth="166.39999999999998">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fill="WHITE" fontSmoothingType="LCD" layoutX="33.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva contraseña*" wrappingWidth="166.39999999999998">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <PasswordField fx:id="oldPasswordInput" layoutX="32.0" layoutY="95.0" prefHeight="37.0" prefWidth="252.0" styleClass="inputField" />
+                                          <PasswordField fx:id="newPasswordInput" layoutX="32.0" layoutY="176.0" prefHeight="37.0" prefWidth="252.0" styleClass="inputField" />
+                                          <PasswordField fx:id="newPasswordConfirm" layoutX="32.0" layoutY="257.0" prefHeight="37.0" prefWidth="252.0" styleClass="inputField" />
+                                       </children>
+                                    </Pane>
+                                    <Pane fx:id="passwordChangedMessage" prefHeight="152.0" prefWidth="334.0" visible="false">
+                                       <children>
+                                          <SVGPath content="M23.542,5.573L15.112,13.716c-.876,.862-2.009,1.295-3.145,1.295-1.122,0-2.246-.423-3.127-1.271l-2.858-2.638c-.608-.562-.646-1.511-.085-2.12,.563-.609,1.512-.645,2.12-.085l2.882,2.66c.613,.59,1.535,.586,2.118,.011L21.458,3.415c.596-.575,1.545-.558,2.121,.037,.575,.596,.559,1.545-.037,2.121Zm-18.328-.085c.342,0,.687-.116,.968-.354,.332-.281,.688-.541,1.057-.771,.701-.44,.914-1.366,.475-2.068-.44-.702-1.366-.911-2.068-.475-.489,.307-.96,.651-1.4,1.023-.633,.535-.712,1.481-.177,2.114,.297,.351,.72,.531,1.146,.531Zm-1.546,9.921c-.164-.402-.301-.818-.404-1.238-.199-.805-1.017-1.297-1.815-1.097-.805,.198-1.296,1.012-1.097,1.815,.139,.562,.32,1.118,.539,1.654,.237,.581,.798,.933,1.39,.933,.188,0,.381-.035,.566-.111,.767-.313,1.135-1.189,.821-1.956ZM1.442,10.963c.12,.029,.239,.043,.356,.043,.676,0,1.289-.459,1.456-1.145,.104-.423,.237-.839,.399-1.238,.312-.768-.058-1.643-.825-1.954-.771-.312-1.643,.06-1.954,.825-.218,.535-.397,1.093-.534,1.656-.196,.806,.297,1.617,1.102,1.812ZM11.248,3.026c.036,0,.535-.026,.752-.026s.716,.026,.752,.026c.779,0,1.438-.604,1.494-1.394,.059-.827-.563-1.544-1.39-1.603-.283-.021-.569-.03-.856-.03s-.573,.01-.856,.03c-.826,.059-1.448,.775-1.39,1.603,.056,.79,.715,1.394,1.494,1.394Zm11.31,10.019c-.807-.196-1.617,.295-1.814,1.1-.104,.421-.238,.838-.401,1.24-.312,.768,.058,1.643,.825,1.954,.186,.075,.376,.11,.563,.11,.593,0,1.154-.354,1.391-.936,.218-.536,.398-1.093,.536-1.654,.197-.805-.295-1.616-1.1-1.814Zm-4.746,5.827c-.333,.282-.688,.541-1.055,.77-.702,.438-.916,1.364-.478,2.067,.284,.455,.773,.705,1.273,.705,.271,0,.547-.073,.794-.228,.488-.306,.96-.649,1.402-1.023,.633-.535,.712-1.481,.177-2.114-.534-.631-1.481-.712-2.114-.177Zm-10.547,.783c-.367-.229-.724-.486-1.057-.767-.634-.535-1.581-.451-2.113,.182-.533,.634-.452,1.58,.182,2.113,.443,.373,.917,.717,1.406,1.021,.246,.153,.52,.226,.79,.226,.501,0,.991-.251,1.275-.709,.437-.704,.221-1.629-.483-2.065Zm5.402,1.32c-.431,.03-.876,.032-1.307,.002-.812-.058-1.543,.563-1.603,1.39s.562,1.544,1.39,1.603c.281,.021,.565,.03,.853,.03,.297,0,.592-.011,.884-.032,.826-.06,1.447-.778,1.388-1.604-.061-.826-.786-1.45-1.604-1.388Z" fill="#7dda58" layoutX="155.0" layoutY="42.0" style="-fx-scale-x: 1.7; -fx-scale-y: 1.7;" />
+                                          <Label layoutX="37.0" layoutY="92.0" text="Contraseña Actualizada" textFill="#7dda58">
+                                             <font>
+                                                <Font name="SansSerif Bold" size="23.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </Pane>
                                  </children>

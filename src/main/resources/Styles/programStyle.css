@@ -3,11 +3,11 @@
 }
 
 .orangeButton{
-    -fx-background-color : rgb(255, 128, 0);
+    -fx-background-color : #123F93;
 }
 
 .orangeButton:hover{
-    -fx-background-color : rgb(254,82,2);
+    -fx-background-color : #301296;
 }
 
 .menuButton{
@@ -16,7 +16,7 @@
 }
 
 .inputField:focused{
-    -fx-border-color : rgb(255, 128, 0);
+    -fx-border-color : #123F93;
     -fx-border-width : 2;
 }
 

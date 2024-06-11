@@ -11,6 +11,16 @@
     -fx-text-fill : white;
 }
 
+.inputField:hover{
+    -fx-background-color :  rgb(254,82,2);
+}
+
+.inputField{
+    -fx-background-radius : .5em;
+    -fx-border-radius : .5em;
+    -fx-background-color :  rgb(255,128,0);
+}
+
 #loginButton:hover{
     -fx-background-color :  rgb(254,82,2);
 }
