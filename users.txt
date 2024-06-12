@@ -18,5 +18,25 @@
         "history": [],
         "userName": "santiago",
         "cart": []
+    },
+    {
+        "favorites": [],
+        "password": "poto",
+        "authURI": "otpauth://totp/FurinaGang:AdrianCruz?period=30&digits=6&secret=GFT4YQMLBKGGTRLBKFJBRA6UKJNAPXWK&issuer=FurinaGang&algorithm=SHA512",
+        "displayName": "AdrianCruz",
+        "isAdmin": true,
+        "history": [],
+        "userName": "AdrianCruz",
+        "cart": []
+    },
+    {
+        "favorites": [],
+        "password": "poto",
+        "authURI": "otpauth://totp/FurinaGang:MrCrizz?period=30&digits=6&secret=67NLWUTW3AYGCQVMXD4AQ5DJA2A3RCJM&issuer=FurinaGang&algorithm=SHA512",
+        "displayName": "MrCrizz",
+        "isAdmin": true,
+        "history": [],
+        "userName": "MrCrizz",
+        "cart": []
     }
 ]
