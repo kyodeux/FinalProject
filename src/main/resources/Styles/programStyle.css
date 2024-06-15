@@ -32,6 +32,12 @@
     -fx-fill : white;
 }
 
+.menuButton{
+    -fx-scale-x : .9;
+    -fx-scale-y : .9;
+    -fx-background-radius : 1.5em;
+}
+
 #logOutButton:hover{
     -fx-background-color : red;
 }

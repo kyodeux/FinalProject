@@ -3,7 +3,7 @@
         "favorites": [],
         "password": "poto",
         "authURI": "otpauth://totp/FurinaGang:santee?period=30&digits=6&secret=WXO4AAETNGASK62DOFBDEZHBM3B7I7BM&issuer=FurinaGang&algorithm=SHA512",
-        "displayName": "Santee",
+        "displayName": "Kyo",
         "isAdmin": true,
         "history": [],
         "userName": "santee",

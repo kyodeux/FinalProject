@@ -3,6 +3,7 @@ package Controllers;
 import Model.Animate.EasingStyle;
 import Model.Components.ImageCropper;
 import Model.Components.InputChecker;
+import Model.Components.Menu;
 import Model.User;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -27,10 +28,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
@@ -39,7 +42,8 @@ import javax.imageio.ImageIO;
 public class Program_Handler {
 
     private User user;
-
+    private File profilePicFile;
+    
     // <editor-fold defaultstate="collapsed" desc="Setup FXML variables">
     @FXML
     private AnchorPane background;
@@ -71,8 +75,6 @@ public class Program_Handler {
     private Label userDisplayNameAlt;
     @FXML
     private Label userNameAlt;
-    @FXML
-    private Pane profileView;
     @FXML
     private Pane profileViewContent;
     @FXML
@@ -107,8 +109,64 @@ public class Program_Handler {
     private TextField newPasswordConfirm;
     @FXML
     private ImageView totpQR;
+    @FXML
+    private Pane profileButton;
+    @FXML
+    private Label profileButtonLabel;
+    @FXML
+    private SVGPath profileButtonIcon;
+    @FXML
+    private Pane profileView;
+    @FXML
+    private Pane dashboardButton;
+    @FXML
+    private Label dashboardButtonLabel;
+    @FXML
+    private SVGPath dashboardButtonIcon;
+    @FXML
+    private Pane dashboardView;
+    @FXML
+    private Pane adminButton;
+    @FXML
+    private Label adminButtonLabel;
+    @FXML
+    private SVGPath adminButtonIcon;
+    @FXML
+    private Pane adminView;
+    @FXML
+    private Pane catalogButton;
+    @FXML
+    private Label catalogButtonLabel;
+    @FXML
+    private SVGPath catalogButtonIcon;
+    @FXML
+    private Pane catalogView;
+    @FXML
+    private Pane favoritesButton;
+    @FXML
+    private Label favoritesButtonLabel;
+    @FXML
+    private SVGPath favoritesButtonIcon;
+    @FXML
+    private Pane favoritesView;
+    @FXML
+    private Pane cartButton;
+    @FXML
+    private Label cartButtonLabel;
+    @FXML
+    private SVGPath cartButtonIcon;
+    @FXML
+    private Pane cartView;
+    @FXML
+    private Pane historyButton;
+    @FXML
+    private Label historyButtonLabel;
+    @FXML
+    private SVGPath historyButtonIcon;
+    @FXML
+    private Pane historyView;
+    
     //</editor-fold>
-    private File profilePicFile;
 
     public void setup(User user) {
         this.user = user;
@@ -117,6 +175,8 @@ public class Program_Handler {
     }
 
     public void init() {
+        //Basic setup
+        // <editor-fold defaultstate="collapsed" desc="Basic Setup">
         userDisplayName.setText(user.getDisplayName());
         userName.setText("@" + user.getUserName());
 
@@ -169,6 +229,53 @@ public class Program_Handler {
         clip2.setArcWidth(totpQR.getFitWidth() * .3);
         
         totpQR.setClip(clip2);
+        //</editor-fold>
+        
+        //Creating menus
+        profileMenu = new Menu(
+                profileButton,
+                profileButtonLabel,
+                profileButtonIcon,
+                profileView
+        );
+        dashboardMenu = new Menu(
+                dashboardButton,
+                dashboardButtonLabel,
+                dashboardButtonIcon,
+                dashboardView
+        );
+        adminMenu = new Menu(
+                adminButton,
+                adminButtonLabel,
+                adminButtonIcon,
+                adminView
+        );
+        catalogMenu = new Menu(
+                catalogButton,
+                catalogButtonLabel,
+                catalogButtonIcon,
+                catalogView
+        );
+        favoritesMenu = new Menu(
+                favoritesButton,
+                favoritesButtonLabel,
+                favoritesButtonIcon,
+                favoritesView
+        );
+        cartMenu = new Menu(
+                cartButton,
+                cartButtonLabel,
+                cartButtonIcon,
+                cartView
+        );
+        historyMenu = new Menu(
+                historyButton,
+                historyButtonLabel,
+                historyButtonIcon,
+                historyView
+        );
+        profileMenu.select();
+        selectedMenu = profileMenu;
     }
 
     public void playWelcomeAnimation() {
@@ -274,7 +381,7 @@ public class Program_Handler {
         animation.play();
     }
 
-    //Pfp Editor
+    //pfp editor
     private ImageCropper cropper;
 
     public void handlePfpEdit() {
@@ -323,7 +430,7 @@ public class Program_Handler {
         closeProfilePicEditor();
     }
 
-    //displayName Change
+    //displayName change
     public void openDisplayNameChange() {
         openPopMenu(
                 profileViewContent,
@@ -360,7 +467,7 @@ public class Program_Handler {
         closeDisplayNameChange();
     }
 
-    //password Change
+    //password change
     private ScheduledExecutorService scheduler;
 
     private final Runnable onPasswordChanged = () -> {
@@ -517,6 +624,91 @@ public class Program_Handler {
         });
     }
 
+    //menu navigation
+    private Menu selectedMenu;
+    private Menu profileMenu;
+    private Menu dashboardMenu;
+    private Menu adminMenu;
+    private Menu catalogMenu;
+    private Menu favoritesMenu;
+    private Menu cartMenu;
+    private Menu historyMenu;
+    
+    private void switchMenu(Menu menu){
+        if (selectedMenu != null){
+            selectedMenu.deselect();
+        }
+        
+        menu.select();
+        selectedMenu = menu;
+    }
+    
+    public void handleMenuSelection(MouseEvent e){
+        Pane source = (Pane) e.getSource();
+        if (source.equals(selectedMenu.getButton())){
+            return;
+        }
+        
+        if (source.equals(profileButton)){
+            switchMenu(profileMenu);
+        }else if(source.equals(dashboardButton)){
+            switchMenu(dashboardMenu);
+        }else if(source.equals(adminButton)){
+            switchMenu(adminMenu);
+        }else if(source.equals(catalogButton)){
+            switchMenu(catalogMenu);
+        }else if(source.equals(favoritesButton)){
+            switchMenu(favoritesMenu);
+        }else if(source.equals(cartButton)){
+            switchMenu(cartMenu);
+        }else if(source.equals(historyButton)){
+            switchMenu(historyMenu);
+        }
+    }
+    
+    //TOTP System
+    public Image generateQR(String data, int h, int w) throws WriterException, IOException {
+        String charset = new String(data.getBytes("UTF-8"), "UTF-8");
+
+        BitMatrix matrix = new MultiFormatWriter().encode(
+                charset,
+                BarcodeFormat.QR_CODE,
+                w,
+                h);
+
+        BufferedImage swingImage = MatrixToImageWriter.toBufferedImage(matrix);
+        Image image = SwingFXUtils.toFXImage(swingImage, null);
+        
+        return image;
+    }
+    
+    //Logic
+    public void backToLogin() {
+        double targetWidth = 400;
+        double targetHeight = 535;
+
+        double widthScale = targetWidth / background.getWidth();
+        double heightScale = targetHeight / background.getHeight();
+
+        content.setVisible(false);
+
+        Timeline animation = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(background.scaleXProperty(), background.getScaleX()),
+                        new KeyValue(background.scaleYProperty(), background.getScaleX())
+                ),
+                new KeyFrame(Duration.millis(300),
+                        new KeyValue(background.scaleXProperty(), widthScale, EasingStyle.OutSine),
+                        new KeyValue(background.scaleYProperty(), heightScale, EasingStyle.OutSine)
+                ));
+        
+        if (scheduler != null){scheduler.shutdown();}
+        animation.play();
+        animation.setOnFinished((ActionEvent e) -> {
+            Main.backToLogin();
+        });
+    }
+    
     public void openPopMenu(Pane menu, Pane view, Pane popMenu, Pane popMenuContent) {
         ColorAdjust colorAdjust = new ColorAdjust();
         menu.setEffect(colorAdjust);
@@ -576,50 +768,6 @@ public class Program_Handler {
         sizeAnimation.setOnFinished((ActionEvent e) -> {
             view.setVisible(false);
             menu.setEffect(null);
-        });
-    }
-
-    //TOTP System
-   
-    public Image generateQR(String data, int h, int w) throws WriterException, IOException {
-        String charset = new String(data.getBytes("UTF-8"), "UTF-8");
-
-        BitMatrix matrix = new MultiFormatWriter().encode(
-                charset,
-                BarcodeFormat.QR_CODE,
-                w,
-                h);
-
-        BufferedImage swingImage = MatrixToImageWriter.toBufferedImage(matrix);
-        Image image = SwingFXUtils.toFXImage(swingImage, null);
-        
-        return image;
-    }
-    
-    //Logic
-    public void backToLogin() {
-        double targetWidth = 400;
-        double targetHeight = 535;
-
-        double widthScale = targetWidth / background.getWidth();
-        double heightScale = targetHeight / background.getHeight();
-
-        content.setVisible(false);
-
-        Timeline animation = new Timeline(
-                new KeyFrame(Duration.ZERO,
-                        new KeyValue(background.scaleXProperty(), background.getScaleX()),
-                        new KeyValue(background.scaleYProperty(), background.getScaleX())
-                ),
-                new KeyFrame(Duration.millis(300),
-                        new KeyValue(background.scaleXProperty(), widthScale, EasingStyle.OutSine),
-                        new KeyValue(background.scaleYProperty(), heightScale, EasingStyle.OutSine)
-                ));
-        
-        if (scheduler != null){scheduler.shutdown();}
-        animation.play();
-        animation.setOnFinished((ActionEvent e) -> {
-            Main.backToLogin();
         });
     }
 }
