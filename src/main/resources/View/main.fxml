@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="661.0" prefWidth="991.0" style="-fx-background-color: transparent;" stylesheets="@../Styles/programStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane fx:id="background" opacity="0.985" prefHeight="661.0" prefWidth="991.0" style="-fx-background-color: #0d1117; -fx-background-radius: 1em;" />
+        <FlowPane fx:id="welcomeMessage1" layoutX="401.0" layoutY="337.0" opacity="0.0" orientation="VERTICAL" prefHeight="31.0" prefWidth="182.0">
+            <children>
+                <Label prefHeight="30.0" prefWidth="123.0" text="Ingresando como : " textFill="WHITE">
+                    <font>
+                        <Font name="Arial" size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="welcomeUserType" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="65.0" text="Usuario" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Black" size="14.0" />
+                    </font>
+                </Label>
+            </children>
+        </FlowPane>
+        <Label fx:id="welcomeMessage" layoutX="236.0" layoutY="293.0" opacity="0.0" prefHeight="44.0" prefWidth="518.0" style="-fx-alignment: center;" text="Bienvenido @User" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="30.0" />
+            </font>
+        </Label>
+        <AnchorPane fx:id="content" opacity="0.985" prefHeight="661.0" prefWidth="991.0" style="-fx-background-color: transparent;">
+            <children>
+                <Pane fx:id="menuButtons" layoutY="15.0" prefHeight="632.0" prefWidth="166.0" stylesheets="@../Styles/programStyle.css">
+                    <children>
+                        <VBox alignment="TOP_CENTER" layoutX="4.0" layoutY="150.0" prefHeight="343.0" prefWidth="157.0">
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <children>
+                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="146.0">
+                                    <children>
+                                        <Pane fx:id="profileButton" onMouseClicked="#handleMenuSelection" prefHeight="42.0" prefWidth="213.0" styleClass="menuButton">
+                                            <children>
+                                                <Label fx:id="profileButtonLabel" layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Perfil" textAlignment="CENTER" textFill="#c8c8c8">
+                                                    <font>
+                                                        <Font name="Corbel" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Pane prefHeight="42.0" prefWidth="49.0">
+                                                    <children>
+                                                        <SVGPath fx:id="profileButtonIcon" content="M21,20a2,2,0,0,1-2,2H5a2,2,0,0,1-2-2,6,6,0,0,1,6-6h6A6,6,0,0,1,21,20Zm-9-8A5,5,0,1,0,7,7,5,5,0,0,0,12,12Z" fill="#14c8c8" layoutX="12.0" layoutY="9.0" style="-fx-scale-x: 1; -fx-scale-y: 1;" />
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="91.0" prefHeight="42.0" prefWidth="146.0">
+                                    <children>
+                                        <Pane fx:id="dashboardButton" onMouseClicked="#handleMenuSelection" prefHeight="42.0" prefWidth="213.0" styleClass="menuButton">
+                                            <children>
+                                                <Label fx:id="dashboardButtonLabel" layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Dashboard" textAlignment="CENTER" textFill="#c8c8c8">
+                                                    <font>
+                                                        <Font name="Corbel" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Pane prefHeight="42.0" prefWidth="49.0">
+                                                    <children>
+                                                        <SVGPath fx:id="dashboardButtonIcon" content="m23.9 11.437a12 12 0 0 0 -23.9 1.563 11.878 11.878 0 0 0 3.759 8.712 4.84 4.84 0 0 0 3.354 1.288h9.767a4.994 4.994 0 0 0 3.509-1.429 11.944 11.944 0 0 0 3.511-10.134zm-16.428 8.224a1 1 0 0 1 -1.412.09 8.993 8.993 0 0 1 5.94-15.751 9.1 9.1 0 0 1 2.249.283 1 1 0 1 1 -.5 1.938 6.994 6.994 0 0 0 -6.367 12.028 1 1 0 0 1 .09 1.412zm4.528-4.661a2 2 0 1 1 .512-3.926l3.781-3.781a1 1 0 1 1 1.414 1.414l-3.781 3.781a1.976 1.976 0 0 1 -1.926 2.512zm5.94 4.751a1 1 0 0 1 -1.322-1.5 6.992 6.992 0 0 0 2.161-7 1 1 0 1 1 1.938-.5 9.094 9.094 0 0 1 .283 2.249 9 9 0 0 1 -3.06 6.751z" fill="#14c8c8" layoutX="12.0" layoutY="9.0" style="-fx-scale-x: 1; -fx-scale-y: 1;" />
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="52.0" prefHeight="42.0" prefWidth="146.0">
+                                    <children>
+                                        <Pane fx:id="adminButton" onMouseClicked="#handleMenuSelection" prefHeight="42.0" prefWidth="213.0" styleClass="menuButton">
+                                            <children>
+                                                <Label fx:id="adminButtonLabel" layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Administrar" textAlignment="CENTER" textFill="#c8c8c8">
+                                                    <font>
+                                                        <Font name="Corbel" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Pane prefHeight="42.0" prefWidth="49.0">
+                                                    <children>
+                                                        <SVGPath fx:id="adminButtonIcon" content="m8,12c3.309,0,6-2.691,6-6S11.309,0,8,0,2,2.691,2,6s2.691,6,6,6Zm14.696,7.134l-.974-.562c.166-.497.278-1.019.278-1.572s-.111-1.075-.278-1.572l.974-.562c.478-.276.642-.888.366-1.366-.277-.479-.888-.643-1.366-.366l-.973.562c-.705-.794-1.644-1.375-2.723-1.594v-1.101c0-.552-.448-1-1-1s-1,.448-1,1v1.101c-1.079.22-2.018.801-2.723,1.594l-.973-.562c-.481-.277-1.09-.113-1.366.366-.276.479-.112,1.09.366,1.366l.974.562c-.166.497-.278,1.019-.278,1.572s.111,1.075.278,1.572l-.974.562c-.478.276-.642.888-.366,1.366.186.321.521.5.867.5.169,0,.341-.043.499-.134l.973-.562c.705.794,1.644,1.375,2.723,1.594v1.101c0,.552.448,1,1,1s1-.448,1-1v-1.101c1.079-.22,2.018-.801,2.723-1.594l.973.562c.158.091.33.134.499.134.346,0,.682-.179.867-.5.276-.479.112-1.09-.366-1.366Zm-5.696-.634c-.827,0-1.5-.673-1.5-1.5s.673-1.5,1.5-1.5,1.5.673,1.5,1.5-.673,1.5-1.5,1.5Zm-8.5-1.5c0-.549.055-1.106.165-1.658.066-.333-.042-.676-.285-.912-.243-.236-.589-.332-.92-.257-4.253.976-7.46,4.771-7.46,8.827,0,.552.448,1,1,1h8.637c.386,0,.738-.222.903-.571.166-.349.116-.762-.128-1.061-1.233-1.511-1.912-3.417-1.912-5.368Z" fill="#14c8c8" layoutX="12.0" layoutY="9.0" style="-fx-scale-x: .95; -fx-scale-y: .95;" />
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </HBox>
+                                <AnchorPane prefHeight="38.0" prefWidth="158.0">
+                                    <children>
+                                        <Separator layoutX="17.0" layoutY="5.0" prefHeight="31.0" prefWidth="123.0" />
+                                    </children>
+                                </AnchorPane>
+                                <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="146.0">
+                                    <children>
+                                        <Pane fx:id="catalogButton" onMouseClicked="#handleMenuSelection" prefHeight="42.0" prefWidth="213.0" styleClass="menuButton">
+                                            <children>
+                                                <Label fx:id="catalogButtonLabel" layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Catalogo" textAlignment="CENTER" textFill="#c8c8c8">
+                                                    <font>
+                                                        <Font name="Corbel" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Pane prefHeight="42.0" prefWidth="49.0">
+                                                    <children>
+                                                        <SVGPath fx:id="catalogButtonIcon" content="M23.27,9.03c-.57-.66-1.4-1.03-2.27-1.03h-.09C20.41,3.51,16.59,0,11.97,0S3.53,3.51,3.03,8h-.06c-.87,0-1.7,.38-2.27,1.03C.13,9.69-.12,10.56,0,11.42l1.06,7.42c.42,2.94,2.97,5.15,5.94,5.15h9.97c2.97,0,5.52-2.21,5.94-5.15l1.06-7.42c.12-.86-.13-1.73-.7-2.39ZM11.97,2c3.52,0,6.43,2.61,6.92,6H5.05c.49-3.39,3.4-6,6.92-6Z" fill="#14c8c8" layoutX="12.0" layoutY="9.0" style="-fx-scale-x: .8; -fx-scale-y: .8;" />
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="146.0">
+                                    <children>
+                                        <Pane fx:id="favoritesButton" onMouseClicked="#handleMenuSelection" prefHeight="42.0" prefWidth="213.0" styleClass="menuButton">
+                                            <children>
+                                                <Label fx:id="favoritesButtonLabel" layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Favoritos" textAlignment="CENTER" textFill="#c8c8c8">
+                                                    <font>
+                                                        <Font name="Corbel" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Pane prefHeight="42.0" prefWidth="49.0">
+                                                    <children>
+                                                        <SVGPath fx:id="favoritesButtonIcon" content="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z" fill="#c8c8c8" layoutX="12.0" layoutY="9.0" style="-fx-scale-x: .8; -fx-scale-y: .8;" />
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="52.0" prefHeight="42.0" prefWidth="146.0">
+                                    <children>
+                                        <Pane fx:id="cartButton" onMouseClicked="#handleMenuSelection" prefHeight="42.0" prefWidth="213.0" styleClass="menuButton">
+                                            <children>
+                                                <Label fx:id="cartButtonLabel" layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Carrito" textAlignment="CENTER" textFill="#c8c8c8">
+                                                    <font>
+                                                        <Font name="Corbel" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Pane prefHeight="42.0" prefWidth="49.0">
+                                                    <children>
+                                                        <SVGPath fx:id="cartButtonIcon" content="M22.713,4.077A2.993,2.993,0,0,0,20.41,3H4.242L4.2,2.649A3,3,0,0,0,1.222,0H1A1,1,0,0,0,1,2h.222a1,1,0,0,1,.993.883l1.376,11.7A5,5,0,0,0,8.557,19H19a1,1,0,0,0,0-2H8.557a3,3,0,0,1-2.82-2h11.92a5,5,0,0,0,4.921-4.113l.785-4.354A2.994,2.994,0,0,0,22.713,4.077Z" fill="#c8c8c8" layoutX="12.0" layoutY="9.0" style="-fx-scale-x: 1; -fx-scale-y: 1;" />
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="137.0" prefHeight="42.0" prefWidth="146.0">
+                                    <children>
+                                        <Pane fx:id="historyButton" onMouseClicked="#handleMenuSelection" prefHeight="42.0" prefWidth="213.0" styleClass="menuButton">
+                                            <children>
+                                                <Label fx:id="historyButtonLabel" layoutX="53.0" prefHeight="42.0" prefWidth="94.0" styleClass="menuButtonLabel" text="Historial" textAlignment="CENTER" textFill="#c8c8c8">
+                                                    <font>
+                                                        <Font name="Corbel" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Pane prefHeight="42.0" prefWidth="49.0">
+                                                    <children>
+                                                        <SVGPath fx:id="historyButtonIcon" content="M9,22c0,1.105-.895,2-2,2s-2-.895-2-2,.895-2,2-2,2,.895,2,2Zm8-2c-1.105,0-2,.895-2,2s.895,2,2,2,2-.895,2-2-.895-2-2-2Zm7-15c0,2.761-2.239,5-5,5s-5-2.239-5-5S16.239,0,19,0s5,2.239,5,5Zm-3,2h0c.39-.39,.39-1.024,0-1.414l-1-1v-1.586c0-.552-.448-1-1-1h0c-.552,0-1,.448-1,1v2c0,.265,.105,.52,.293,.707l1.293,1.293c.39,.39,1.024,.39,1.414,0Zm-2,5.115c-3.86,0-7-3.141-7-7,0-.737,.116-1.447,.329-2.115H5.242l-.041-.352c-.179-1.51-1.46-2.648-2.979-2.648H1C.447,0,0,.448,0,1s.447,1,1,1h1.222c.507,0,.934,.38,.993,.883l1.376,11.702c.297,2.517,2.432,4.416,4.966,4.416h9.443c.553,0,1-.448,1-1s-.447-1-1-1H9.557c-1.292,0-2.404-.826-2.82-2h11.424c2.375,0,4.437-1.69,4.902-4.019l.041-.207c-1.155,.84-2.57,1.341-4.104,1.341Z" fill="#c8c8c8" layoutX="12.0" layoutY="9.0" style="-fx-scale-x: 1; -fx-scale-y: 1;" />
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <Pane layoutX="8.0" layoutY="517.0" prefHeight="101.0" prefWidth="150.0">
+                            <children>
+                                <Pane prefHeight="55.0" prefWidth="150.0">
+                                    <children>
+                                        <Label fx:id="userNameIcon" layoutX="65.0" layoutY="13.0" prefHeight="15.0" prefWidth="78.0" text="Username" textFill="WHITE">
+                                            <font>
+                                                <Font name="Segoe UI Bold" size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Pane layoutX="14.0" layoutY="5.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: gray; -fx-background-radius: 100%;">
+                                            <children>
+                                                <ImageView fx:id="profilePictureIcon" cache="true" cacheHint="QUALITY" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" smooth="false" />
+                                            </children>
+                                        </Pane>
+                                        <Label fx:id="userTypeIcon" layoutX="65.0" layoutY="22.0" prefHeight="20.0" prefWidth="78.0" text="User" textFill="WHITE">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Button fx:id="logOutButton" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#backToLogin" prefHeight="25.0" prefWidth="123.0" text="Cerrar sesion" textFill="WHITE">
+                                    <font>
+                                        <Font name="Corbel Bold" size="12.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                            </children>
+                        </Pane>
+                  <ImageView fitHeight="135.0" fitWidth="135.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/appIcon.png" />
+                     </image>
+                  </ImageView>
+                    </children>
+                </Pane>
+                <Pane fx:id="contentDisplay" layoutX="166.0" prefHeight="661.0" prefWidth="825.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em; -fx-border-radius: 1em;">
+                    <children>
+                        <Pane fx:id="profileView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                            <children>
+                                <Pane fx:id="profileViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                                    <children>
+                                        <Pane layoutX="34.0" layoutY="96.0" prefHeight="115.0" prefWidth="115.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 100%;">
+                                            <children>
+                                                <ImageView fx:id="profilePicture" cache="true" fitHeight="109.0" fitWidth="109.0" layoutX="3.0" layoutY="3.0" onMouseClicked="#openProfilePicEditor" pickOnBounds="true" preserveRatio="true" />
+                                            </children>
+                                        </Pane>
+                                        <Label layoutX="34.0" layoutY="31.0" prefHeight="31.0" prefWidth="109.0" text="Perfil" textFill="WHITE">
+                                            <font>
+                                                <Font name="Segoe UI Bold" size="27.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="userDisplayName" layoutX="166.0" layoutY="121.0" text="User" textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="30.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="userName" layoutX="166.0" layoutY="159.0" text="\@username" textFill="#c8c8c8">
+                                            <font>
+                                                <Font size="19.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="35.0" layoutY="275.0" prefHeight="31.0" prefWidth="100.0" text="Publico" textFill="WHITE">
+                                            <font>
+                                                <Font name="Segoe UI Bold" size="20.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="35.0" layoutY="313.0" prefHeight="31.0" prefWidth="142.0" text="NOMBRE PUBLICO" textFill="#888888">
+                                            <font>
+                                                <Font name="Arial Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="userDisplayNameAlt" layoutX="35.0" layoutY="339.0" text="User" textFill="WHITE">
+                                            <font>
+                                                <Font name="Corbel Bold" size="17.0" />
+                                            </font>
+                                        </Label>
+                                        <Button layoutX="412.0" layoutY="324.0" mnemonicParsing="false" onAction="#openDisplayNameChange" prefHeight="31.0" prefWidth="66.0" style="-fx-background-radius: .8em;" styleClass="orangeButton" text="Cambiar" textFill="WHITE">
+                                            <font>
+                                                <Font name="SansSerif Bold" size="12.0" />
+                                            </font>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Label layoutX="35.0" layoutY="383.0" prefHeight="31.0" prefWidth="166.0" text="NOMBRE DE USUARIO" textFill="#888888">
+                                            <font>
+                                                <Font name="Arial Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="userNameAlt" layoutX="35.0" layoutY="409.0" text="Username" textFill="#888888">
+                                            <font>
+                                                <Font name="Corbel Bold" size="17.0" />
+                                            </font>
+                                        </Label>
+                                        <Separator layoutX="34.0" layoutY="432.0" prefHeight="18.0" prefWidth="443.0" scaleY="0.5" />
+                                        <Label layoutX="35.0" layoutY="450.0" prefHeight="31.0" prefWidth="150.0" text="Autenticacion" textFill="WHITE">
+                                            <font>
+                                                <Font name="Segoe UI Bold" size="20.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="34.0" layoutY="489.0" prefHeight="31.0" prefWidth="142.0" text="CREDENCIALES" textFill="#888888">
+                                            <font>
+                                                <Font name="Arial Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="34.0" layoutY="515.0" text="Contraseña" textFill="#888888">
+                                            <font>
+                                                <Font name="Corbel Bold" size="17.0" />
+                                            </font>
+                                        </Label>
+                                        <Button layoutX="412.0" layoutY="500.0" mnemonicParsing="false" onAction="#openPasswordChange" prefHeight="31.0" prefWidth="66.0" style="-fx-background-radius: .8em;" styleClass="orangeButton" text="Cambiar" textFill="WHITE">
+                                            <font>
+                                                <Font name="SansSerif Bold" size="12.0" />
+                                            </font>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button fx:id="editProfilePicture" layoutX="60.0" layoutY="220.0" mnemonicParsing="false" onAction="#handlePfpEdit" prefHeight="15.0" prefWidth="63.0" text="Editar" textFill="#123f93">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Corbel" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Pane layoutX="516.0" layoutY="259.0" prefHeight="383.0" prefWidth="288.0" style="-fx-background-color: rgb(43, 45, 49); -fx-background-radius: 1.5em;">
+                                 <children>
+                                    <Text fill="#dcdcdc" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sigue estos sencillos pasos y podras acceder a tu cuenta si olvidas la contraseña:" textAlignment="CENTER" wrappingWidth="260.73779296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#c1ddb3" layoutX="26.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1  -  Descarga la app de autenticacion de tu preferencia &gt; Google Authenticator." wrappingWidth="235.17529296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#c1ddb3" layoutX="26.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2  -   Localiza la opcion para agregar una nueva cuenta." wrappingWidth="235.17529296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#c1ddb3" layoutX="26.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3  -   Escanea el código QR." wrappingWidth="235.17529296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#c1ddb3" layoutX="26.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4  -   Todo listo ;)" wrappingWidth="235.17529296875">
+                                       <font>
+                                          <Font name="Arial Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <ImageView fx:id="totpQR" fitHeight="160.0" fitWidth="160.0" layoutX="64.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Pane>
+                              <Label layoutX="516.0" layoutY="230.0" prefHeight="31.0" prefWidth="166.0" text="PROTEGE TU CUENTA" textFill="#888888">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="34.0" layoutY="574.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" style="-fx-background-color: transparent; -fx-border-color: red; -fx-border-radius: .5em; -fx-background-radius: .5em; -fx-border-width: 1.5;" text="Elimar cuenta" textFill="WHITE">
+                                 <font>
+                                    <Font name="Corbel" size="14.0" />
+                                 </font>
+                              </Button>
+                                    </children>
+                                </Pane>
+                                <Pane fx:id="profilePicEditorView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                                    <children>
+                                        <Pane fx:id="profilePicEditor" layoutX="269.0" layoutY="135.0" prefHeight="391.0" prefWidth="288.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                                            <children>
+                                                <Pane fx:id="profilePicEditorContent" prefHeight="391.0" prefWidth="288.0" visible="false">
+                                                    <children>
+                                                        <Label layoutX="102.0" layoutY="14.0" prefHeight="31.0" prefWidth="85.0" style="-fx-alignment: center;" text="Recorte" textAlignment="CENTER" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Segoe UI Bold" size="20.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <ImageView fx:id="backgroundView" fitHeight="250.0" fitWidth="250.0" layoutX="19.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+                                                        <ImageView fx:id="viewport" fitHeight="250.0" fitWidth="250.0" layoutX="19.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+                                                        <SVGPath content="M13,3V1a1,1,0,0,0-2,0V3a7.008,7.008,0,0,0-7,7v6a8,8,0,0,0,16,0V10A7.008,7.008,0,0,0,13,3Zm0,7a1,1,0,0,1-2,0V8a1,1,0,0,1,2,0Z" fill="WHITE" layoutX="98.0" layoutY="313.0" />
+                                                        <SVGPath content="M23,9.545,20.57,7.07a1.5,1.5,0,1,0-2.14,2.1l1.3,1.327H13.5V4.266l1.327,1.3a1.5,1.5,0,1,0,2.1-2.14L14.458,1a3.5,3.5,0,0,0-2.444-1H12A3.493,3.493,0,0,0,9.545,1L7.07,3.43a1.5,1.5,0,1,0,2.1,2.14L10.5,4.265V10.5H4.266l1.3-1.327a1.5,1.5,0,1,0-2.14-2.1L1,9.542a3.5,3.5,0,0,0-1,2.444V12H0a3.493,3.493,0,0,0,1,2.454L3.43,16.93a1.5,1.5,0,1,0,2.14-2.1L4.265,13.5H10.5v6.239l-1.327-1.3a1.5,1.5,0,1,0-2.1,2.14l2.472,2.43a3.521,3.521,0,0,0,4.913,0l2.475-2.433a1.5,1.5,0,1,0-2.1-2.14l-1.327,1.3V13.5h6.234l-1.3,1.327a1.5,1.5,0,1,0,2.14,2.1L23,14.458a3.521,3.521,0,0,0,0-4.913Z" fill="WHITE" layoutX="165.0" layoutY="313.0" />
+                                                        <SVGPath content="M10.561,13.439c.586,.585,.586,1.536,0,2.121l-5.439,5.439h2.379c.828,0,1.5,.671,1.5,1.5s-.672,1.5-1.5,1.5H3.5c-1.93,0-3.5-1.57-3.5-3.5v-4c0-.829,.672-1.5,1.5-1.5s1.5,.671,1.5,1.5v2.379l5.439-5.439c.586-.586,1.535-.586,2.121,0ZM20.5,0h-4c-.828,0-1.5,.671-1.5,1.5s.672,1.5,1.5,1.5h2.379l-5.439,5.439c-.586,.585-.586,1.536,0,2.121,.293,.293,.677,.439,1.061,.439s.768-.146,1.061-.439l5.439-5.439v2.379c0,.829,.672,1.5,1.5,1.5s1.5-.671,1.5-1.5V3.5c0-1.93-1.57-3.5-3.5-3.5Z" fill="WHITE" layoutX="132.0" layoutY="313.0" />
+                                                        <SVGPath content="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z" fill="#535353" layoutX="256.0" layoutY="8.0" onMouseClicked="#closeProfilePicEditor" style="-fx-scale-x: 1.3; -fx-scale-y: 1.3;" styleClass="closeButton">
+                                                            <cursor>
+                                                                <Cursor fx:constant="HAND" />
+                                                            </cursor>
+                                                        </SVGPath>
+                                                        <Button layoutX="94.0" layoutY="349.0" mnemonicParsing="false" onAction="#changePfp" prefHeight="24.0" prefWidth="100.0" style="-fx-background-radius: .5em;" styleClass="orangeButton" text="Aplicar" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Segoe UI Bold" size="14.0" />
+                                                            </font>
+                                                            <cursor>
+                                                                <Cursor fx:constant="HAND" />
+                                                            </cursor>
+                                                        </Button>
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </Pane>
+                        <Pane fx:id="displayNameChangeView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                           <children>
+                              <Pane fx:id="displayNameChange" layoutX="255.0" layoutY="229.0" prefHeight="204.0" prefWidth="316.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                                 <children>
+                                    <Pane fx:id="displayNameChangeContent" prefHeight="204.0" prefWidth="316.0" visible="false">
+                                       <children>
+                                          <SVGPath content="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z" fill="#535353" layoutX="281.0" layoutY="10.0" onMouseClicked="#closeDisplayNameChange" style="-fx-scale-x: 1.3; -fx-scale-y: 1.3;" styleClass="closeButton">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </SVGPath>
+                                          <TextField fx:id="newDisplayName" layoutX="32.0" layoutY="97.0" prefHeight="37.0" prefWidth="252.0" styleClass="inputField">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TextField>
+                                          <Text fill="WHITE" fontSmoothingType="LCD" layoutX="32.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" wrappingWidth="68.0">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <Label layoutX="88.0" layoutY="15.0" prefHeight="31.0" prefWidth="142.0" style="-fx-alignment: center;" text="Nuevo Usuario" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="updateDisplayName" layoutX="109.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleDisplayNameChangeRequest" prefHeight="24.0" prefWidth="100.0" style="-fx-background-radius: .5em;" styleClass="orangeButton" text="Aplicar" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="14.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Text fx:id="displayNameCheck" fill="#c75a5a" fontSmoothingType="LCD" layoutX="100.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="179.20001220703125">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="passwordChangeView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                           <children>
+                              <Pane fx:id="passwordChange" layoutX="255.0" layoutY="148.0" prefHeight="366.0" prefWidth="316.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                                 <children>
+                                    <Pane fx:id="passwordChangeContent" prefHeight="366.0" prefWidth="316.0" visible="false">
+                                       <children>
+                                          <SVGPath content="M14.121,12,18,8.117A1.5,1.5,0,0,0,15.883,6L12,9.879,8.11,5.988A1.5,1.5,0,1,0,5.988,8.11L9.879,12,6,15.882A1.5,1.5,0,1,0,8.118,18L12,14.121,15.878,18A1.5,1.5,0,0,0,18,15.878Z" fill="#535353" layoutX="281.0" layoutY="10.0" onMouseClicked="#closePasswordChange" style="-fx-scale-x: 1.3; -fx-scale-y: 1.3;" styleClass="closeButton">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </SVGPath>
+                                          <Text fill="WHITE" fontSmoothingType="LCD" layoutX="32.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vieja contraseña" wrappingWidth="166.39999999999998">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <Label layoutX="64.0" layoutY="15.0" prefHeight="31.0" prefWidth="189.0" style="-fx-alignment: center;" text="Cambio Contraseña" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Button layoutX="109.0" layoutY="316.0" mnemonicParsing="false" onAction="#handlePasswordChangeRequest" prefHeight="24.0" prefWidth="100.0" style="-fx-background-radius: .5em;" styleClass="orangeButton" text="Aplicar" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="14.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Text fill="WHITE" fontSmoothingType="LCD" layoutX="32.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva contraseña" wrappingWidth="166.39999999999998">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fill="WHITE" fontSmoothingType="LCD" layoutX="33.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva contraseña*" wrappingWidth="166.39999999999998">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <PasswordField fx:id="oldPasswordInput" layoutX="32.0" layoutY="95.0" prefHeight="37.0" prefWidth="252.0" styleClass="inputField" />
+                                          <PasswordField fx:id="newPasswordInput" layoutX="32.0" layoutY="176.0" prefHeight="37.0" prefWidth="252.0" styleClass="inputField" />
+                                          <PasswordField fx:id="newPasswordConfirm" layoutX="32.0" layoutY="257.0" prefHeight="37.0" prefWidth="252.0" styleClass="inputField" />
+                                       </children>
+                                    </Pane>
+                                    <Pane fx:id="passwordChangedMessage" prefHeight="152.0" prefWidth="334.0" visible="false">
+                                       <children>
+                                          <SVGPath content="M23.542,5.573L15.112,13.716c-.876,.862-2.009,1.295-3.145,1.295-1.122,0-2.246-.423-3.127-1.271l-2.858-2.638c-.608-.562-.646-1.511-.085-2.12,.563-.609,1.512-.645,2.12-.085l2.882,2.66c.613,.59,1.535,.586,2.118,.011L21.458,3.415c.596-.575,1.545-.558,2.121,.037,.575,.596,.559,1.545-.037,2.121Zm-18.328-.085c.342,0,.687-.116,.968-.354,.332-.281,.688-.541,1.057-.771,.701-.44,.914-1.366,.475-2.068-.44-.702-1.366-.911-2.068-.475-.489,.307-.96,.651-1.4,1.023-.633,.535-.712,1.481-.177,2.114,.297,.351,.72,.531,1.146,.531Zm-1.546,9.921c-.164-.402-.301-.818-.404-1.238-.199-.805-1.017-1.297-1.815-1.097-.805,.198-1.296,1.012-1.097,1.815,.139,.562,.32,1.118,.539,1.654,.237,.581,.798,.933,1.39,.933,.188,0,.381-.035,.566-.111,.767-.313,1.135-1.189,.821-1.956ZM1.442,10.963c.12,.029,.239,.043,.356,.043,.676,0,1.289-.459,1.456-1.145,.104-.423,.237-.839,.399-1.238,.312-.768-.058-1.643-.825-1.954-.771-.312-1.643,.06-1.954,.825-.218,.535-.397,1.093-.534,1.656-.196,.806,.297,1.617,1.102,1.812ZM11.248,3.026c.036,0,.535-.026,.752-.026s.716,.026,.752,.026c.779,0,1.438-.604,1.494-1.394,.059-.827-.563-1.544-1.39-1.603-.283-.021-.569-.03-.856-.03s-.573,.01-.856,.03c-.826,.059-1.448,.775-1.39,1.603,.056,.79,.715,1.394,1.494,1.394Zm11.31,10.019c-.807-.196-1.617,.295-1.814,1.1-.104,.421-.238,.838-.401,1.24-.312,.768,.058,1.643,.825,1.954,.186,.075,.376,.11,.563,.11,.593,0,1.154-.354,1.391-.936,.218-.536,.398-1.093,.536-1.654,.197-.805-.295-1.616-1.1-1.814Zm-4.746,5.827c-.333,.282-.688,.541-1.055,.77-.702,.438-.916,1.364-.478,2.067,.284,.455,.773,.705,1.273,.705,.271,0,.547-.073,.794-.228,.488-.306,.96-.649,1.402-1.023,.633-.535,.712-1.481,.177-2.114-.534-.631-1.481-.712-2.114-.177Zm-10.547,.783c-.367-.229-.724-.486-1.057-.767-.634-.535-1.581-.451-2.113,.182-.533,.634-.452,1.58,.182,2.113,.443,.373,.917,.717,1.406,1.021,.246,.153,.52,.226,.79,.226,.501,0,.991-.251,1.275-.709,.437-.704,.221-1.629-.483-2.065Zm5.402,1.32c-.431,.03-.876,.032-1.307,.002-.812-.058-1.543,.563-1.603,1.39s.562,1.544,1.39,1.603c.281,.021,.565,.03,.853,.03,.297,0,.592-.011,.884-.032,.826-.06,1.447-.778,1.388-1.604-.061-.826-.786-1.45-1.604-1.388Z" fill="#7dda58" layoutX="155.0" layoutY="42.0" style="-fx-scale-x: 1.7; -fx-scale-y: 1.7;" />
+                                          <Label layoutX="37.0" layoutY="92.0" text="Contraseña Actualizada" textFill="#7dda58">
+                                             <font>
+                                                <Font name="SansSerif Bold" size="23.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                            </children>
+                        </Pane>
+                  <Pane fx:id="dashboardView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                     <children>
+                        <Pane fx:id="dashboardViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                           <children>
+                              <Label layoutX="34.0" layoutY="31.0" prefHeight="33.0" prefWidth="166.0" text="Dashboard" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="27.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="28.0" layoutY="77.0" prefHeight="31.0" prefWidth="100.0" text="RESUMEN" textFill="#888888">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Pane layoutX="20.0" layoutY="106.0" prefHeight="130.0" prefWidth="181.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <SVGPath content="M23.32,4.1c-.57-.7-1.42-1.1-2.32-1.1H7.24l-.04-.35c-.18-1.51-1.46-2.65-2.98-2.65h-1.22c-.55,0-1,.45-1,1s.45,1,1,1h1.22c.51,0,.93,.38,.99,.88l1.38,11.7c.3,2.52,2.43,4.42,4.97,4.42h8.44c.55,0,1-.45,1-1s-.45-1-1-1H11.56c-1.29,0-2.4-.83-2.82-2h9.42c2.38,0,4.44-1.69,4.9-4.02l.88-4.39c.18-.88-.05-1.79-.62-2.49ZM11,22c0,1.1-.9,2-2,2s-2-.9-2-2,.9-2,2-2,2,.9,2,2Zm9,0c0,1.1-.9,2-2,2s-2-.9-2-2,.9-2,2-2,2,.9,2,2ZM0,6c0-.55,.45-1,1-1h1.54c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm0,4c0-.55,.45-1,1-1H3c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm5,4c0,.55-.45,1-1,1H1c-.55,0-1-.45-1-1s.45-1,1-1h3c.55,0,1,.45,1,1Z" fill="#31b626" layoutX="30.0" layoutY="39.0" scaleX="2.5" scaleY="2.5" />
+                                    <Line id="salesLine" fx:id="salesLine" endX="51.79998779296875" layoutX="114.0" layoutY="97.0" startX="-100.0" stroke="#31b626" strokeWidth="3.0" />
+                                    <Label layoutX="64.0" layoutY="103.0" text="Ventas" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="salesStat" fx:id="salesStat" alignment="BASELINE_RIGHT" layoutX="73.0" layoutY="72.0" prefHeight="23.0" prefWidth="93.0" text="10" textAlignment="RIGHT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="20.0" layoutY="256.0" prefHeight="383.0" prefWidth="320.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Pane>
+                              <Pane layoutX="360.0" layoutY="256.0" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <Text fill="WHITE" layoutX="10.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top producto" wrappingWidth="109.0">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="15.0" />
+                                       </font>
+                                    </Text>
+                                    <Label layoutX="10.0" layoutY="24.0" text="#1" textFill="#c09711">
+                                       <font>
+                                          <Font name="System Bold Italic" size="27.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane layoutX="63.0" layoutY="54.0" prefHeight="109.0" prefWidth="109.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 1em;" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="166.0" prefHeight="23.0" prefWidth="208.0" text="product_Name" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <FlowPane alignment="CENTER" layoutX="3.0" layoutY="189.0" prefHeight="48.0" prefWidth="229.0">
+                                       <children>
+                                          <SVGPath fx:id="favoritesButtonIcon1" content="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z" fill="#ff4a4a" />
+                                          <Pane layoutX="68.0" layoutY="22.0" prefHeight="24.0" prefWidth="6.0" />
+                                          <Label fx:id="topProductLikesStat" alignment="CENTER" text="999" textAlignment="RIGHT" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                          <Pane prefHeight="24.0" prefWidth="13.0" />
+                                          <SVGPath fx:id="favoritesButtonIcon11" content="M23.32,4.1c-.57-.7-1.42-1.1-2.32-1.1H7.24l-.04-.35c-.18-1.51-1.46-2.65-2.98-2.65h-1.22c-.55,0-1,.45-1,1s.45,1,1,1h1.22c.51,0,.93,.38,.99,.88l1.38,11.7c.3,2.52,2.43,4.42,4.97,4.42h8.44c.55,0,1-.45,1-1s-.45-1-1-1H11.56c-1.29,0-2.4-.83-2.82-2h9.42c2.38,0,4.44-1.69,4.9-4.02l.88-4.39c.18-.88-.05-1.79-.62-2.49ZM11,22c0,1.1-.9,2-2,2s-2-.9-2-2,.9-2,2-2,2,.9,2,2Zm9,0c0,1.1-.9,2-2,2s-2-.9-2-2,.9-2,2-2,2,.9,2,2ZM0,6c0-.55,.45-1,1-1h1.54c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm0,4c0-.55,.45-1,1-1H3c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm5,4c0,.55-.45,1-1,1H1c-.55,0-1-.45-1-1s.45-1,1-1h3c.55,0,1,.45,1,1Z" fill="#31b626" />
+                                          <Pane layoutX="35.0" layoutY="22.0" prefHeight="24.0" prefWidth="6.0" />
+                                          <Label fx:id="topProductSellsStat" alignment="CENTER" text="999" textAlignment="RIGHT" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </FlowPane>
+                                    <SVGPath content="M22.766,4.566A1.994,1.994,0,0,0,20.586,5L18,7.586,13.414,3a2,2,0,0,0-2.828,0L6,7.586,3.414,5A2,2,0,0,0,0,6.414V17a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V6.414A2,2,0,0,0,22.766,4.566Z" fill="#c09711" layoutX="62.0" layoutY="44.0" scaleX="1.5" scaleY="1.5" style="-fx-rotate: -29;" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="360.0" layoutY="516.0" prefHeight="123.0" prefWidth="235.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <Pane layoutX="80.0" layoutY="16.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 100%;">
+                                       <children>
+                                          <ImageView fx:id="profilePicture1" cache="true" fitHeight="70.0" fitWidth="70.0" layoutX="3.0" layoutY="3.0" onMouseClicked="#openProfilePicEditor" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </Pane>
+                                    <SVGPath content="M22.766,4.566A1.994,1.994,0,0,0,20.586,5L18,7.586,13.414,3a2,2,0,0,0-2.828,0L6,7.586,3.414,5A2,2,0,0,0,0,6.414V17a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V6.414A2,2,0,0,0,22.766,4.566Z" fill="#c09711" layoutX="84.0" layoutY="7.0" scaleX="1.5" scaleY="1.5" style="-fx-rotate: -29;" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="94.0" prefHeight="23.0" prefWidth="208.0" text="Kyo" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fill="WHITE" layoutX="10.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top usuario" wrappingWidth="55.2662641525269">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="15.0" />
+                                       </font>
+                                    </Text>
+                                    <Label layoutX="10.0" layoutY="44.0" text="#1" textFill="#c09711">
+                                       <font>
+                                          <Font name="System Bold Italic" size="27.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="615.0" layoutY="256.0" prefHeight="383.0" prefWidth="189.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Pane>
+                              <Pane layoutX="221.0" layoutY="106.0" prefHeight="130.0" prefWidth="181.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <SVGPath content="M23.27,9.03c-.57-.66-1.4-1.03-2.27-1.03h-.09C20.41,3.51,16.59,0,11.97,0S3.53,3.51,3.03,8h-.06c-.87,0-1.7,.38-2.27,1.03C.13,9.69-.12,10.56,0,11.42l1.06,7.42c.42,2.94,2.97,5.15,5.94,5.15h9.97c2.97,0,5.52-2.21,5.94-5.15l1.06-7.42c.12-.86-.13-1.73-.7-2.39ZM11.97,2c3.52,0,6.43,2.61,6.92,6H5.05c.49-3.39,3.4-6,6.92-6Z" fill="#ff4942" layoutX="30.0" layoutY="39.0" scaleX="2.3" scaleY="2.3" />
+                                    <Line id="stockLine" fx:id="stockLine" endX="51.79998779296875" layoutX="114.0" layoutY="97.0" startX="-100.0" stroke="#ff4942" strokeWidth="3.0" />
+                                    <Label alignment="CENTER" layoutX="70.0" layoutY="103.0" text="Stock" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="stockStat" fx:id="stockStat" alignment="BASELINE_RIGHT" layoutX="73.0" layoutY="72.0" prefHeight="23.0" prefWidth="93.0" text="10" textAlignment="RIGHT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="422.0" layoutY="106.0" prefHeight="130.0" prefWidth="181.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <SVGPath content="M21,20a2,2,0,0,1-2,2H5a2,2,0,0,1-2-2,6,6,0,0,1,6-6h6A6,6,0,0,1,21,20Zm-9-8A5,5,0,1,0,7,7,5,5,0,0,0,12,12Z" fill="#6353c7" layoutX="30.0" layoutY="39.0" scaleX="2.7" scaleY="2.7" />
+                                    <Line id="usersLine" fx:id="usersLine" endX="51.79998779296875" layoutX="114.0" layoutY="97.0" startX="-100.0" stroke="#6353c7" strokeWidth="3.0" />
+                                    <Label alignment="CENTER" layoutX="59.0" layoutY="103.0" text="Usuarios" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="usersStat" fx:id="usersStat" alignment="BASELINE_RIGHT" layoutX="73.0" layoutY="72.0" prefHeight="23.0" prefWidth="93.0" text="10" textAlignment="RIGHT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="623.0" layoutY="106.0" prefHeight="130.0" prefWidth="181.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <SVGPath content="M18.5,9.5A1.5,1.5,0,0,0,20,8V7.313A5.32,5.32,0,0,0,14.687,2H13.5V1.5a1.5,1.5,0,0,0-3,0V2H9.313A5.313,5.313,0,0,0,7.772,12.4l2.728.746V19H9.313A2.316,2.316,0,0,1,7,16.687V16a1.5,1.5,0,0,0-3,0v.687A5.32,5.32,0,0,0,9.313,22H10.5v.5a1.5,1.5,0,0,0,3,0V22h1.187a5.313,5.313,0,0,0,1.541-10.4L13.5,10.856V5h1.187A2.316,2.316,0,0,1,17,7.313V8A1.5,1.5,0,0,0,18.5,9.5Zm-3.118,4.979a2.314,2.314,0,0,1-.7,4.521H13.5V13.965ZM10.5,10.035,8.618,9.521A2.314,2.314,0,0,1,9.313,5H10.5Z" fill="#7dda58" layoutX="30.0" layoutY="39.0" scaleX="2.5" scaleY="2.5" />
+                                    <Line id="revenueLine" fx:id="revenueLine" endX="51.79998779296875" layoutX="114.0" layoutY="97.0" startX="-100.0" stroke="#7dda58" strokeWidth="3.0" />
+                                    <Label alignment="CENTER" layoutX="53.0" layoutY="103.0" text="Ganancias" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="revenueStat" fx:id="revenueStat" alignment="BASELINE_RIGHT" layoutX="51.0" layoutY="72.0" prefHeight="23.0" prefWidth="115.0" text="COP 999.999.999" textAlignment="RIGHT" textFill="#7dda58">
+                                       <font>
+                                          <Font name="Arial Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="adminView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                     <children>
+                        <Pane fx:id="adminViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                           <children>
+                              <Label layoutX="259.0" layoutY="180.0" prefHeight="17.0" prefWidth="199.0" text="Administrar" textFill="WHITE">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="catalogView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                     <children>
+                        <Pane fx:id="catalogViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                           <children>
+                              <Label layoutX="259.0" layoutY="180.0" prefHeight="17.0" prefWidth="199.0" text="Catalogo" textFill="WHITE">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="favoritesView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                     <children>
+                        <Pane fx:id="favoritesViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                           <children>
+                              <Label layoutX="259.0" layoutY="180.0" prefHeight="17.0" prefWidth="199.0" text="Favorites" textFill="WHITE">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="cartView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                     <children>
+                        <Pane fx:id="cartViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                           <children>
+                              <Label layoutX="259.0" layoutY="180.0" prefHeight="17.0" prefWidth="199.0" text="Carrito" textFill="WHITE">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="historyView" prefHeight="661.0" prefWidth="826.0" visible="false">
+                     <children>
+                        <Pane fx:id="historyViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
+                           <children>
+                              <Label layoutX="259.0" layoutY="180.0" prefHeight="17.0" prefWidth="199.0" text="Historial" textFill="WHITE">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
