@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -216,7 +217,7 @@
                                         </Label>
                                         <Pane layoutX="14.0" layoutY="5.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: gray; -fx-background-radius: 100%;">
                                             <children>
-                                                <ImageView fx:id="profilePictureIcon" cache="true" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="profilePictureIcon" cache="true" cacheHint="QUALITY" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" smooth="false" />
                                             </children>
                                         </Pane>
                                         <Label fx:id="userTypeIcon" layoutX="65.0" layoutY="22.0" prefHeight="20.0" prefWidth="78.0" text="User" textFill="WHITE">
@@ -249,7 +250,7 @@
                             <children>
                                 <Pane fx:id="profileViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
                                     <children>
-                                        <Pane layoutX="34.0" layoutY="96.0" prefHeight="115.0" prefWidth="115.0" style="-fx-background-color: gray; -fx-background-radius: 100%;">
+                                        <Pane layoutX="34.0" layoutY="96.0" prefHeight="115.0" prefWidth="115.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 100%;">
                                             <children>
                                                 <ImageView fx:id="profilePicture" cache="true" fitHeight="109.0" fitWidth="109.0" layoutX="3.0" layoutY="3.0" onMouseClicked="#openProfilePicEditor" pickOnBounds="true" preserveRatio="true" />
                                             </children>
@@ -404,7 +405,7 @@
                                                                 <Cursor fx:constant="HAND" />
                                                             </cursor>
                                                         </SVGPath>
-                                                        <Button layoutX="94.0" layoutY="349.0" mnemonicParsing="false" onAction="#updatePfp" prefHeight="24.0" prefWidth="100.0" style="-fx-background-radius: .5em;" styleClass="orangeButton" text="Aplicar" textFill="WHITE">
+                                                        <Button layoutX="94.0" layoutY="349.0" mnemonicParsing="false" onAction="#changePfp" prefHeight="24.0" prefWidth="100.0" style="-fx-background-radius: .5em;" styleClass="orangeButton" text="Aplicar" textFill="WHITE">
                                                             <font>
                                                                 <Font name="Segoe UI Bold" size="14.0" />
                                                             </font>
@@ -527,11 +528,205 @@
                      <children>
                         <Pane fx:id="dashboardViewContent" prefHeight="661.0" prefWidth="826.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 1em;">
                            <children>
-                              <Label layoutX="259.0" layoutY="180.0" prefHeight="17.0" prefWidth="199.0" text="Dashboard" textFill="WHITE">
+                              <Label layoutX="34.0" layoutY="31.0" prefHeight="33.0" prefWidth="166.0" text="Dashboard" textFill="WHITE">
                                  <font>
-                                    <Font size="17.0" />
+                                    <Font name="Segoe UI Bold" size="27.0" />
                                  </font>
                               </Label>
+                              <Label layoutX="28.0" layoutY="77.0" prefHeight="31.0" prefWidth="100.0" text="RESUMEN" textFill="#888888">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Pane layoutX="20.0" layoutY="106.0" prefHeight="130.0" prefWidth="181.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <SVGPath content="M23.32,4.1c-.57-.7-1.42-1.1-2.32-1.1H7.24l-.04-.35c-.18-1.51-1.46-2.65-2.98-2.65h-1.22c-.55,0-1,.45-1,1s.45,1,1,1h1.22c.51,0,.93,.38,.99,.88l1.38,11.7c.3,2.52,2.43,4.42,4.97,4.42h8.44c.55,0,1-.45,1-1s-.45-1-1-1H11.56c-1.29,0-2.4-.83-2.82-2h9.42c2.38,0,4.44-1.69,4.9-4.02l.88-4.39c.18-.88-.05-1.79-.62-2.49ZM11,22c0,1.1-.9,2-2,2s-2-.9-2-2,.9-2,2-2,2,.9,2,2Zm9,0c0,1.1-.9,2-2,2s-2-.9-2-2,.9-2,2-2,2,.9,2,2ZM0,6c0-.55,.45-1,1-1h1.54c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm0,4c0-.55,.45-1,1-1H3c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm5,4c0,.55-.45,1-1,1H1c-.55,0-1-.45-1-1s.45-1,1-1h3c.55,0,1,.45,1,1Z" fill="#31b626" layoutX="30.0" layoutY="39.0" scaleX="2.5" scaleY="2.5" />
+                                    <Line id="salesLine" fx:id="salesLine" endX="51.79998779296875" layoutX="114.0" layoutY="97.0" startX="-100.0" stroke="#31b626" strokeWidth="3.0" />
+                                    <Label layoutX="64.0" layoutY="103.0" text="Ventas" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="salesStat" fx:id="salesStat" alignment="BASELINE_RIGHT" layoutX="73.0" layoutY="72.0" prefHeight="23.0" prefWidth="93.0" text="10" textAlignment="RIGHT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="20.0" layoutY="256.0" prefHeight="383.0" prefWidth="320.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Pane>
+                              <Pane layoutX="360.0" layoutY="256.0" prefHeight="243.0" prefWidth="235.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <Text fill="WHITE" layoutX="10.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top producto" wrappingWidth="109.0">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="15.0" />
+                                       </font>
+                                    </Text>
+                                    <Label layoutX="10.0" layoutY="24.0" text="#1" textFill="#c09711">
+                                       <font>
+                                          <Font name="System Bold Italic" size="27.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane layoutX="63.0" layoutY="54.0" prefHeight="109.0" prefWidth="109.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 1em;" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="166.0" prefHeight="23.0" prefWidth="208.0" text="product_Name" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <FlowPane alignment="CENTER" layoutX="3.0" layoutY="189.0" prefHeight="48.0" prefWidth="229.0">
+                                       <children>
+                                          <SVGPath fx:id="favoritesButtonIcon1" content="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z" fill="#ff4a4a" />
+                                          <Pane layoutX="68.0" layoutY="22.0" prefHeight="24.0" prefWidth="6.0" />
+                                          <Label fx:id="topProductLikesStat" alignment="CENTER" text="999" textAlignment="RIGHT" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                          <Pane prefHeight="24.0" prefWidth="13.0" />
+                                          <SVGPath fx:id="favoritesButtonIcon11" content="M23.32,4.1c-.57-.7-1.42-1.1-2.32-1.1H7.24l-.04-.35c-.18-1.51-1.46-2.65-2.98-2.65h-1.22c-.55,0-1,.45-1,1s.45,1,1,1h1.22c.51,0,.93,.38,.99,.88l1.38,11.7c.3,2.52,2.43,4.42,4.97,4.42h8.44c.55,0,1-.45,1-1s-.45-1-1-1H11.56c-1.29,0-2.4-.83-2.82-2h9.42c2.38,0,4.44-1.69,4.9-4.02l.88-4.39c.18-.88-.05-1.79-.62-2.49ZM11,22c0,1.1-.9,2-2,2s-2-.9-2-2,.9-2,2-2,2,.9,2,2Zm9,0c0,1.1-.9,2-2,2s-2-.9-2-2,.9-2,2-2,2,.9,2,2ZM0,6c0-.55,.45-1,1-1h1.54c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm0,4c0-.55,.45-1,1-1H3c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm5,4c0,.55-.45,1-1,1H1c-.55,0-1-.45-1-1s.45-1,1-1h3c.55,0,1,.45,1,1Z" fill="#31b626" />
+                                          <Pane layoutX="35.0" layoutY="22.0" prefHeight="24.0" prefWidth="6.0" />
+                                          <Label fx:id="topProductSellsStat" alignment="CENTER" text="999" textAlignment="RIGHT" textFill="WHITE">
+                                             <font>
+                                                <Font name="Segoe UI Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </FlowPane>
+                                    <SVGPath content="M22.766,4.566A1.994,1.994,0,0,0,20.586,5L18,7.586,13.414,3a2,2,0,0,0-2.828,0L6,7.586,3.414,5A2,2,0,0,0,0,6.414V17a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V6.414A2,2,0,0,0,22.766,4.566Z" fill="#c09711" layoutX="62.0" layoutY="44.0" scaleX="1.5" scaleY="1.5" style="-fx-rotate: -29;" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="360.0" layoutY="516.0" prefHeight="123.0" prefWidth="235.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <Pane layoutX="80.0" layoutY="16.0" prefHeight="76.0" prefWidth="76.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 100%;">
+                                       <children>
+                                          <ImageView fx:id="profilePicture1" cache="true" fitHeight="70.0" fitWidth="70.0" layoutX="3.0" layoutY="3.0" onMouseClicked="#openProfilePicEditor" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </Pane>
+                                    <SVGPath content="M22.766,4.566A1.994,1.994,0,0,0,20.586,5L18,7.586,13.414,3a2,2,0,0,0-2.828,0L6,7.586,3.414,5A2,2,0,0,0,0,6.414V17a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V6.414A2,2,0,0,0,22.766,4.566Z" fill="#c09711" layoutX="84.0" layoutY="7.0" scaleX="1.5" scaleY="1.5" style="-fx-rotate: -29;" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="94.0" prefHeight="23.0" prefWidth="208.0" text="Kyo" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fill="WHITE" layoutX="10.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top usuario" wrappingWidth="55.2662641525269">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="15.0" />
+                                       </font>
+                                    </Text>
+                                    <Label layoutX="10.0" layoutY="44.0" text="#1" textFill="#c09711">
+                                       <font>
+                                          <Font name="System Bold Italic" size="27.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="615.0" layoutY="256.0" prefHeight="383.0" prefWidth="189.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Pane>
+                              <Pane layoutX="221.0" layoutY="106.0" prefHeight="130.0" prefWidth="181.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <SVGPath content="M23.27,9.03c-.57-.66-1.4-1.03-2.27-1.03h-.09C20.41,3.51,16.59,0,11.97,0S3.53,3.51,3.03,8h-.06c-.87,0-1.7,.38-2.27,1.03C.13,9.69-.12,10.56,0,11.42l1.06,7.42c.42,2.94,2.97,5.15,5.94,5.15h9.97c2.97,0,5.52-2.21,5.94-5.15l1.06-7.42c.12-.86-.13-1.73-.7-2.39ZM11.97,2c3.52,0,6.43,2.61,6.92,6H5.05c.49-3.39,3.4-6,6.92-6Z" fill="#ff4942" layoutX="30.0" layoutY="39.0" scaleX="2.3" scaleY="2.3" />
+                                    <Line id="stockLine" fx:id="stockLine" endX="51.79998779296875" layoutX="114.0" layoutY="97.0" startX="-100.0" stroke="#ff4942" strokeWidth="3.0" />
+                                    <Label alignment="CENTER" layoutX="70.0" layoutY="103.0" text="Stock" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="stockStat" fx:id="stockStat" alignment="BASELINE_RIGHT" layoutX="73.0" layoutY="72.0" prefHeight="23.0" prefWidth="93.0" text="10" textAlignment="RIGHT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="422.0" layoutY="106.0" prefHeight="130.0" prefWidth="181.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <SVGPath content="M21,20a2,2,0,0,1-2,2H5a2,2,0,0,1-2-2,6,6,0,0,1,6-6h6A6,6,0,0,1,21,20Zm-9-8A5,5,0,1,0,7,7,5,5,0,0,0,12,12Z" fill="#6353c7" layoutX="30.0" layoutY="39.0" scaleX="2.7" scaleY="2.7" />
+                                    <Line id="usersLine" fx:id="usersLine" endX="51.79998779296875" layoutX="114.0" layoutY="97.0" startX="-100.0" stroke="#6353c7" strokeWidth="3.0" />
+                                    <Label alignment="CENTER" layoutX="59.0" layoutY="103.0" text="Usuarios" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="usersStat" fx:id="usersStat" alignment="BASELINE_RIGHT" layoutX="73.0" layoutY="72.0" prefHeight="23.0" prefWidth="93.0" text="10" textAlignment="RIGHT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="623.0" layoutY="106.0" prefHeight="130.0" prefWidth="181.0" style="-fx-background-color: #2B2D31; -fx-border-radius: 1.3em; -fx-background-radius: 1.3em;">
+                                 <effect>
+                                    <DropShadow offsetX="6.0" offsetY="6.5">
+                                       <color>
+                                          <Color red="0.0784313753247261" green="0.0784313753247261" blue="0.0784313753247261" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <SVGPath content="M18.5,9.5A1.5,1.5,0,0,0,20,8V7.313A5.32,5.32,0,0,0,14.687,2H13.5V1.5a1.5,1.5,0,0,0-3,0V2H9.313A5.313,5.313,0,0,0,7.772,12.4l2.728.746V19H9.313A2.316,2.316,0,0,1,7,16.687V16a1.5,1.5,0,0,0-3,0v.687A5.32,5.32,0,0,0,9.313,22H10.5v.5a1.5,1.5,0,0,0,3,0V22h1.187a5.313,5.313,0,0,0,1.541-10.4L13.5,10.856V5h1.187A2.316,2.316,0,0,1,17,7.313V8A1.5,1.5,0,0,0,18.5,9.5Zm-3.118,4.979a2.314,2.314,0,0,1-.7,4.521H13.5V13.965ZM10.5,10.035,8.618,9.521A2.314,2.314,0,0,1,9.313,5H10.5Z" fill="#7dda58" layoutX="30.0" layoutY="39.0" scaleX="2.5" scaleY="2.5" />
+                                    <Line id="revenueLine" fx:id="revenueLine" endX="51.79998779296875" layoutX="114.0" layoutY="97.0" startX="-100.0" stroke="#7dda58" strokeWidth="3.0" />
+                                    <Label alignment="CENTER" layoutX="53.0" layoutY="103.0" text="Ganancias" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="revenueStat" fx:id="revenueStat" alignment="BASELINE_RIGHT" layoutX="51.0" layoutY="72.0" prefHeight="23.0" prefWidth="115.0" text="COP 999.999.999" textAlignment="RIGHT" textFill="#7dda58">
+                                       <font>
+                                          <Font name="Arial Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
                            </children>
                         </Pane>
                      </children>

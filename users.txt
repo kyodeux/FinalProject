@@ -1,22 +1,12 @@
 [
     {
         "favorites": [],
-        "password": "poto",
+        "password": "kyodeux",
         "authURI": "otpauth://totp/FurinaGang:santee?period=30&digits=6&secret=WXO4AAETNGASK62DOFBDEZHBM3B7I7BM&issuer=FurinaGang&algorithm=SHA512",
         "displayName": "Kyo",
         "isAdmin": true,
         "history": [],
         "userName": "santee",
-        "cart": []
-    },
-    {
-        "favorites": [],
-        "password": "poto",
-        "authURI": "otpauth://totp/FurinaGang:santiago?period=30&digits=6&secret=5IUX53RKBOFJQYUNYCDRJLBHL5PUGNFZ&issuer=FurinaGang&algorithm=SHA512",
-        "displayName": "Kyo",
-        "isAdmin": false,
-        "history": [],
-        "userName": "santiago",
         "cart": []
     },
     {
@@ -37,6 +27,26 @@
         "isAdmin": true,
         "history": [],
         "userName": "MrCrizz",
+        "cart": []
+    },
+    {
+        "favorites": [],
+        "password": "user",
+        "authURI": "otpauth://totp/FurinaGang:user?period=30&digits=6&secret=6ERH44KPQYCO2NJDVKTZIQDGNIWO6PMC&issuer=FurinaGang&algorithm=SHA512",
+        "displayName": "user",
+        "isAdmin": false,
+        "history": [],
+        "userName": "user",
+        "cart": []
+    },
+    {
+        "favorites": [],
+        "password": "poto",
+        "authURI": "otpauth://totp/FurinaGang:kyodeux?period=30&digits=6&secret=5B3TWZOFX7J5AD7F65UQJU66BM7L3XYT&issuer=FurinaGang&algorithm=SHA512",
+        "displayName": "kyodeux",
+        "isAdmin": false,
+        "history": [],
+        "userName": "kyodeux",
         "cart": []
     }
 ]

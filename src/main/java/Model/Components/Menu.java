@@ -65,4 +65,10 @@ public class Menu {
         buttonLabel.setStyle(null);
         view.setVisible(false);
     }
+    
+    public void disable(){
+        button.setDisable(true);
+        buttonIcon.setStyle("-fx-fill : rgb(100, 100, 100);");
+        buttonLabel.setStyle("-fx-text-fill : rgb(190, 190 ,190);");
+    }
 }

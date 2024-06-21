@@ -1,10 +1,12 @@
 package Controllers;
 
+import Controllers.Menu.Dashboard;
 import Model.Animate.EasingStyle;
 import Model.Components.ImageCropper;
 import Model.Components.InputChecker;
 import Model.Components.Menu;
 import Model.User;
+import Model.Animate.StatAnimation;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -13,6 +15,7 @@ import com.google.zxing.common.BitMatrix;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -38,11 +41,21 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
+import org.imgscalr.Scalr;
 
 public class Program_Handler {
 
     private User user;
     private File profilePicFile;
+    
+    private Menu selectedMenu;
+    private Menu profileMenu;
+    private Menu dashboardMenu;
+    private Menu adminMenu;
+    private Menu catalogMenu;
+    private Menu favoritesMenu;
+    private Menu cartMenu;
+    private Menu historyMenu;
     
     // <editor-fold defaultstate="collapsed" desc="Setup FXML variables">
     @FXML
@@ -183,9 +196,7 @@ public class Program_Handler {
         userDisplayNameAlt.setText(user.getDisplayName());
         userNameAlt.setText(user.getUserName());
 
-        Image pfp = new Image(profilePicFile.toURI().toString());
-        profilePicture.setImage(pfp);
-        profilePictureIcon.setImage(pfp);
+        updatePfp();
 
         Rectangle clip = new Rectangle();
         clip.setWidth(profilePicture.getFitWidth());
@@ -276,6 +287,13 @@ public class Program_Handler {
         );
         profileMenu.select();
         selectedMenu = profileMenu;
+        
+        if (!user.isAdmin()){
+            dashboardMenu.disable();
+            adminMenu.disable();
+        }
+        
+        dashboard = new Dashboard();
     }
 
     public void playWelcomeAnimation() {
@@ -417,19 +435,42 @@ public class Program_Handler {
         );
     }
 
-    public void updatePfp() {
+    public void changePfp() {
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(cropper.getCroppedImage(), null), "png", profilePicFile);
 
-            Image pfp = new Image(profilePicFile.toURI().toString());
-            profilePicture.setImage(pfp);
-            profilePictureIcon.setImage(pfp);
         } catch (IOException e) {
         }
-
+        
+        updatePfp();
         closeProfilePicEditor();
     }
 
+    public void updatePfp(){
+        try{
+            BufferedImage pfpImage = ImageIO.read(profilePicFile);
+            
+            BufferedImage scaledPfp = Scalr.resize(
+                    pfpImage,
+                    Scalr.Method.ULTRA_QUALITY,
+                    (int) profilePicture.getFitWidth(),
+                    (int) profilePicture.getFitHeight()
+            );
+            BufferedImage scaledPfpIcon = Scalr.resize(
+                    pfpImage,
+                    Scalr.Method.ULTRA_QUALITY,
+                    (int) profilePictureIcon.getFitWidth(),
+                    (int) profilePicture.getFitHeight()
+            );
+            
+            Image scaledPfpFX = SwingFXUtils.toFXImage(scaledPfp, null);
+            Image scaledPfpIconFX = SwingFXUtils.toFXImage(scaledPfpIcon, null);
+            
+            profilePicture.setImage(scaledPfpFX);
+            profilePictureIcon.setImage(scaledPfpIconFX);
+        }catch(IOException e){}
+    }
+    
     //displayName change
     public void openDisplayNameChange() {
         openPopMenu(
@@ -624,15 +665,8 @@ public class Program_Handler {
         });
     }
 
-    //menu navigation
-    private Menu selectedMenu;
-    private Menu profileMenu;
-    private Menu dashboardMenu;
-    private Menu adminMenu;
-    private Menu catalogMenu;
-    private Menu favoritesMenu;
-    private Menu cartMenu;
-    private Menu historyMenu;
+    //menu navigation    
+    private Dashboard dashboard;
     
     private void switchMenu(Menu menu){
         if (selectedMenu != null){
@@ -653,6 +687,7 @@ public class Program_Handler {
             switchMenu(profileMenu);
         }else if(source.equals(dashboardButton)){
             switchMenu(dashboardMenu);
+            dashboard.update();
         }else if(source.equals(adminButton)){
             switchMenu(adminMenu);
         }else if(source.equals(catalogButton)){
@@ -674,7 +709,8 @@ public class Program_Handler {
                 charset,
                 BarcodeFormat.QR_CODE,
                 w,
-                h);
+                h
+        );
 
         BufferedImage swingImage = MatrixToImageWriter.toBufferedImage(matrix);
         Image image = SwingFXUtils.toFXImage(swingImage, null);

@@ -24,6 +24,7 @@ public class Main extends Application {
     private static Stage stage;
     private static Scene currentProgramUI;
     private static Program_Handler programHandler;
+    public static final CircularQueue catalog = new CircularQueue();
     public static final CircularQueue userList = new CircularQueue();
     public static final JSONObject userCatalog = new JSONObject();
 
@@ -55,9 +56,7 @@ public class Main extends Application {
 
     public static void loadUsers() {
         File backup = new File(System.getProperty("user.dir") + "\\users.txt");
-        if (!backup.exists()) {
-            return;
-        }
+        if (!backup.exists()) {return;}
 
         StringBuilder builder = new StringBuilder();
 
@@ -145,19 +144,21 @@ public class Main extends Application {
 
             stage.setX(stage.getX() + previusWidth / 2 - stage.getWidth() / 2);
             stage.setY(stage.getY() + previusHeight / 2 - stage.getHeight() / 2);
-        } catch (IOException e) {
-        }
+        } catch (IOException e) {}
     }
 
-    public static Stage getStage() {
-        return stage;
+    public static Stage getStage() {return stage;}
+    
+    public static Scene getUI(){
+        return currentProgramUI;
     }
-
+    
     public static void main(String[] args) {
         loadUsers();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             saveUsers();
         }));
+        
         launch(args);
     }
 }
