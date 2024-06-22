@@ -38,15 +38,5 @@
         "history": [],
         "userName": "user",
         "cart": []
-    },
-    {
-        "favorites": [],
-        "password": "poto",
-        "authURI": "otpauth://totp/FurinaGang:kyodeux?period=30&digits=6&secret=5B3TWZOFX7J5AD7F65UQJU66BM7L3XYT&issuer=FurinaGang&algorithm=SHA512",
-        "displayName": "kyodeux",
-        "isAdmin": false,
-        "history": [],
-        "userName": "kyodeux",
-        "cart": []
     }
 ]
