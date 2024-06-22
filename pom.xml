@@ -39,12 +39,12 @@
         <dependency>  
             <groupId>com.google.zxing</groupId>  
             <artifactId>core</artifactId>  
-            <version>3.3.0</version>  
+            <version>3.5.3</version>  
         </dependency>  
         <dependency>  
             <groupId>com.google.zxing</groupId>  
             <artifactId>javase</artifactId>  
-            <version>3.3.0</version>  
+            <version>3.5.3</version>  
         </dependency>
         <dependency>
             <groupId>org.imgscalr</groupId>
@@ -57,7 +57,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.13.0</version>
                 <configuration>
                     <release>11</release>
                 </configuration>
