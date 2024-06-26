@@ -12,6 +12,10 @@ public class User extends NodeContainer {
     private final String authURI;
     private final String userName;
     private boolean isAdmin;
+    
+    private int purchases;
+    private double spent;
+    
     public boolean forgotPassword = false;
     private final CircularQueue favorites = new CircularQueue();
     private final CircularQueue history = new CircularQueue();
@@ -55,6 +59,8 @@ public class User extends NodeContainer {
         this.userName = data.getString("userName");
         this.isAdmin = data.getBoolean("isAdmin");
         this.authURI = data.getString("authURI");
+        this.purchases = data.getInt("purchases");
+        this.spent = data.getDouble("spent");
         
         JSONArray favoritesJSON = (JSONArray) data.get("favorites");
         JSONArray historyJSON = (JSONArray) data.get("favorites");
@@ -81,6 +87,9 @@ public class User extends NodeContainer {
         data.put("userName", userName);
         data.put("isAdmin", isAdmin);
         data.put("authURI", authURI);
+        data.put("purchases", purchases);
+        data.put("spent", spent);
+        
         data.put("favorites", favorites.toJSON());
         data.put("history", history.toJSON());
         data.put("cart", cart.toJSON());
